@@ -1,0 +1,29 @@
+<ion-content>
+  <div class="responsivo">
+    <form (ngSubmit)="cadastroForm()">
+      <div class="ion-padding">
+        <ion-item class="ion-margin radius item-form">
+          <ion-input type="text" placeholder="Nome"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin radius item-form">
+          <ion-input type="text" placeholder="Data de nascimento"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin radius item-form">
+          <ion-input type="text" placeholder="Email"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin radius item-form">
+          <ion-input type="password" placeholder="Senha"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin radius item-form">
+          <ion-input type="password" placeholder="Confirmar Senha"></ion-input>
+        </ion-item>
+        <ion-button class="ion-margin botao-cadastro" type="submit" expand="block">Cadastro</ion-button>
+      </div>
+    </form>
+
+    <div class="texto-cadastro">
+      Já possui um tuuiter? Faça o login 
+      <p><a routerLink="/login">Clicando aqui</a></p>
+    </div>
+  </div>
+</ion-content>
