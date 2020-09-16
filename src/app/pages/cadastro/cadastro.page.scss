@@ -1,26 +1,14 @@
 /* Responsividade */
-@media only screen and (max-height: 900px){
-    .responsivo {
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-        height: 100%;
-    }
+
+.content{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@media only screen and (max-height: 700px){
-    .responsivo {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        height: 100%;
-    }
-}
-
-@media only screen and (max-height: 600px){
-    .responsivo {
-        padding-top: 0;
-        padding-bottom: 0;
-        height: 100%;
-    }
+.content-child {
+    width: 100%;
 }
 
 /* Estilo dos campos e botão*/

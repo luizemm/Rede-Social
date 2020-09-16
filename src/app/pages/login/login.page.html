@@ -1,28 +1,30 @@
 <ion-content>
-  <div class="responsivo">
-    <ion-grid>
-      <ion-row>
-        <ion-col class="dimensao-img centraliza">
-          <ion-img [src]="img" class="dimensao-img"></ion-img>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <div class="content">
+    <div class="content-child">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="dimensao-img centraliza">
+            <ion-img [src]="img" class="dimensao-img"></ion-img>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    
+      <form (ngSubmit)="loginForm()">
+        <div class="ion-padding">
+          <ion-item class="ion-margin radius item-form">
+            <ion-input type="text" placeholder="Usuário"></ion-input>
+          </ion-item>
+          <ion-item class="ion-margin radius item-form">
+            <ion-input type="password" placeholder="Senha"></ion-input>
+          </ion-item>
+          <ion-button class="ion-margin botao-login" routerLink="/home" expand="block">Login</ion-button>
+        </div>
+      </form>
   
-    <form (ngSubmit)="loginForm()">
-      <div class="ion-padding">
-        <ion-item class="ion-margin radius item-form">
-          <ion-input type="text" placeholder="Usuário"></ion-input>
-        </ion-item>
-        <ion-item class="ion-margin radius item-form">
-          <ion-input type="password" placeholder="Senha"></ion-input>
-        </ion-item>
-        <ion-button class="ion-margin botao-login" routerLink="/home" expand="block">Login</ion-button>
+      <div class="texto-cadastro">
+        Não possui um tuuiter? Cadastre agora 
+        <p><a routerLink="/cadastro">Clicando aqui</a></p>
       </div>
-    </form>
-
-    <div class="texto-cadastro">
-      Não possui um tuuiter? Cadastre agora 
-      <p><a routerLink="/cadastro">Clicando aqui</a></p>
     </div>
-  </div>
+    </div>
 </ion-content>
