@@ -1,4 +1,39 @@
-/* Menu */
+/* Estilo Menu */
+
+/* Display flex */
+
+.flex {
+  display: flex !important;
+}
+
+/* Estilo da linha que separa a coluna superior da listagem */
+
+.line-menu {
+  padding-bottom: 1.375rem;
+  border-bottom: 0.0625rem solid #363636;
+}
+
+/* Estilo imagem de perfil */
+
+.profile-pic-menu{
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+/* Estilo da fonte do nome */
+
+.name-menu {
+  font-weight: bold;
+}
+
+/* Estilo da fonte do seguidores/seguindo */
+
+.follow-menu {
+  font-size: 0.875rem;
+}
+
+/* Estilo da listagem de paginas */
 
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
@@ -22,10 +57,6 @@ ion-menu.md ion-note {
 ion-menu.md ion-list-header,
 ion-menu.md ion-note {
   padding-left: 10px;
-}
-
-ion-menu.md ion-list#inbox-list {
-  border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
 }
 
 ion-menu.md ion-list#inbox-list ion-list-header {

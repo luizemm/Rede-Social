@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
       icon: 'exit'
     }
   ];
+  public profileImg ='../assets/pictures/default profile.jpg'
 
   constructor(
     private platform: Platform,

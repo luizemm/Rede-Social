@@ -2,13 +2,30 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
+        <ion-grid class="line-menu">
+          <ion-row>
+            <ion-col class="flex ion-justify-content-center">
+              <img class="profile-pic-menu" [src]="profileImg" alt="profile">
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="flex ion-justify-content-center">
+              <h4 class="name-menu">Luiz Eduardo</h4>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="flex ion-justify-content-center">
+              <span class="follow-menu">24 Seguidores</span>
+            </ion-col>
+            <ion-col class="flex ion-justify-content-center">
+              <span class="follow-menu">120 Seguindo</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
         <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
-
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-outline'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
