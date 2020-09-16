@@ -1,0 +1,37 @@
+<ion-grid class="post-border" fixed>
+  <ion-row>
+    <ion-col>
+      <ion-row>
+        <ion-col class="ion-align-items-center flex">
+          <img class="profile-pic same-line" [src]="picture" alt="profile">
+          <div class="same-line">
+            <span class="same-line" id="name">{{name}}</span>
+            <ion-icon class="icon same-line gray" id="circle" name="ellipse"></ion-icon>
+            <span class="same-line amount gray" id="time">{{time}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <span>
+            texto texto texto texto texto texto texto texto texto texto texto texto
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="1.5" class="flex direction ion-justify-content-end ion-align-items-end">
+      <ion-buttons class="button-margin ion-align-items-center">
+        <ion-icon class="gray tiny-margin" name="share-social-outline"></ion-icon>
+        <span class="amount gray">{{share}}</span>
+      </ion-buttons>
+      <ion-buttons class="button-margin ion-align-items-center">
+        <ion-icon class="gray tiny-margin" name="chatbox-outline"></ion-icon>
+        <span class="amount gray">{{comment}}</span>
+      </ion-buttons>
+      <ion-buttons class="ion-align-items-center">
+        <ion-icon class="gray tiny-margin" name="thumbs-up-outline"></ion-icon>
+        <span class="amount gray">{{like}}</span>
+      </ion-buttons>
+    </ion-col>
+  </ion-row>
+</ion-grid>

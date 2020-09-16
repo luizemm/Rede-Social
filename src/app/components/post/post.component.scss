@@ -1,0 +1,72 @@
+/* Borda do post*/
+
+.post-border {
+    border-bottom: 0.0625rem solid #3e3e3e;
+}
+
+/* Display flex*/
+
+.flex {
+    display: flex !important;
+}
+
+/* Estilo da imagem de perfil */
+
+.profile-pic{
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+/* Estilo do icone de circulo*/
+
+.icon#circle {
+    font-size: 0.3125rem;
+    margin-right: 0.3125rem;
+    margin-left: 0.3125rem;
+    vertical-align: middle;
+    color: #687684;
+}
+
+/* Estilo do texto de perfil */
+
+.same-line {
+    display: inline-block;
+}
+
+span#name{
+    font-weight: bold;
+}
+
+span#time{
+    vertical-align: middle;
+}
+
+/* Estilo do numero de curtidas/comentarios/compartilhados e do tempo do post */
+
+.amount {
+    font-size: 0.75rem;
+}
+
+/* Espaço entre os botoes de curtida/comentarios/coompartilhados */
+
+.button-margin {
+    margin-bottom: 1rem;
+}
+
+/* Espaço entre icone e numero (botoes de curtida/comentarios/coompartilhados) */
+.tiny-margin {
+    margin-right: 0.125rem;
+}
+
+/* Muda o sentido de alinhamento de cima para baixo */
+
+.direction {
+    flex-direction: column;
+}
+
+/* Cores */
+.gray {
+    color: #687684;
+}

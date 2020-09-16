@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { PostComponent } from './pages/home/post/post.component';
+import { PostComponent } from './components/post/post.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },
-  {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
     path: 'login',
