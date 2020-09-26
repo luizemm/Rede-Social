@@ -1,0 +1,44 @@
+/* Estilos da div pai */
+
+div.parent {
+    height: 100%;
+    width: 100%;
+}
+
+/* Estilos da div profile */
+
+div.profile {
+    width: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0.0625rem solid #3e3e3e;
+}
+
+.profile-pic{
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+/* Estilos da div options */
+
+.options {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    border-top: 0.0625rem solid #3e3e3e;
+}
+
+.icons-option {
+    font-size: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.icon-end-option  {
+    font-size: 1.5rem;
+    margin-left: auto;
+}
