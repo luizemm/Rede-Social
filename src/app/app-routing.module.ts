@@ -21,7 +21,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
 
-  { path: 'post', component: PostComponent }
+  { path: 'post', component: PostComponent },
+  {
+    path: 'new-post',
+    loadChildren: () => import('./pages/new-post/new-post.module').then( m => m.NewPostPageModule)
+  }
 ];
 
 @NgModule({
