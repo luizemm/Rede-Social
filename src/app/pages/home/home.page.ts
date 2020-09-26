@@ -14,7 +14,34 @@ export class HomePage implements OnInit {
       name : "Luiz Eduardo",
       picture : "../../../assets/pictures/default profile.jpg",
       time : "12h",
-      post : "texto texto texto texto texto texto texto",
+      text : "texto texto texto texto texto texto texto",
+      like : 50,
+      comment : 25,
+      share : 40
+    },
+    {
+      name : "Luiz Eduardo",
+      picture : "../../../assets/pictures/default profile.jpg",
+      time : "12h",
+      text : "texto texto texto texto texto texto texto",
+      like : 50,
+      comment : 25,
+      share : 40
+    },
+    {
+      name : "Luiz Eduardo",
+      picture : "../../../assets/pictures/default profile.jpg",
+      time : "12h",
+      text : "texto texto texto texto texto texto texto",
+      like : 50,
+      comment : 25,
+      share : 40
+    },
+    {
+      name : "Luiz Eduardo",
+      picture : "../../../assets/pictures/default profile.jpg",
+      time : "12h",
+      text : "texto texto texto texto texto texto texto",
       like : 50,
       comment : 25,
       share : 40

@@ -4,7 +4,7 @@ export interface post {
   name : String;
   picture : String;
   time : String;
-  post : String;
+  text : String;
   like : Number;
   comment : Number;
   share : Number;
