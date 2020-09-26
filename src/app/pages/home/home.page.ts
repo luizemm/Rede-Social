@@ -7,7 +7,6 @@ import { post } from 'src/app/models/post/post.module';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  img : String = "../../assets/pictures/logo twitter.png";
 
   posts : post[] = [
     {
