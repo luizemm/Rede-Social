@@ -1,0 +1,25 @@
+<ion-header>
+  <app-header-toolbar></app-header-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="back-button">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </div>
+  <app-post [post]="post"></app-post>
+  <div class="comment">
+    <ion-input class="comment-input" type="text" placeholder="Comente algo..."></ion-input>
+    <ion-buttons class="send-comment" slot="end">
+      <ion-icon class="icone" id="search" name="send-outline"></ion-icon>
+    </ion-buttons>
+  </div>
+  <app-post [post]="post"></app-post>
+  <app-post [post]="post"></app-post>
+  <app-post [post]="post"></app-post>
+</ion-content>
+
+<ion-footer>
+  <app-footer-toolbar></app-footer-toolbar>
+</ion-footer>
