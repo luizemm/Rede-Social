@@ -10,6 +10,7 @@ export class HomePage implements OnInit {
 
   posts : post[] = [
     {
+      id: 1,
       name : "Luiz Eduardo",
       picture : "../../../assets/pictures/default profile.jpg",
       time : "12h",
@@ -19,6 +20,7 @@ export class HomePage implements OnInit {
       share : 40
     },
     {
+      id: 2,
       name : "Luiz Eduardo",
       picture : "../../../assets/pictures/default profile.jpg",
       time : "12h",
@@ -28,6 +30,7 @@ export class HomePage implements OnInit {
       share : 40
     },
     {
+      id: 3,
       name : "Luiz Eduardo",
       picture : "../../../assets/pictures/default profile.jpg",
       time : "12h",
@@ -37,6 +40,7 @@ export class HomePage implements OnInit {
       share : 40
     },
     {
+      id: 4,
       name : "Luiz Eduardo",
       picture : "../../../assets/pictures/default profile.jpg",
       time : "12h",

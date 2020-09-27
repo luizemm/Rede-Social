@@ -1,6 +1,5 @@
-import { NumberValueAccessor } from '@angular/forms';
-
 export interface post {
+  id : Number;
   name : String;
   picture : String;
   time : String;
