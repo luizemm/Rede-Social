@@ -23,6 +23,26 @@ div.profile {
     margin-right: 0.5rem;
 }
 
+/* Estilos textarea */
+
+div.textarea {
+    width: 100%;
+    height: calc(100% - 56px - 24px - 16px * 4 - 2px); // total - div profile - div options - padding das divs - borda das divs
+}
+
+textarea.post {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    background-color: #121212;
+    padding: 0.625rem;
+    border: none;
+}
+
+textarea.post:focus {
+    outline: none;
+}
+
 /* Estilos da div options */
 
 .options {
