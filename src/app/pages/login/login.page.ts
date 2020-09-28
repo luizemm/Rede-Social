@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PersonService } from 'src/app/services/person.service';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
   img : String = "../../assets/pictures/logo twitter.png";
+  user : String;
+  password : String;
 
-  constructor() { }
+  constructor(private personService : PersonService, private route : Router) { }
 
   ngOnInit() {
+  }
+
+  onSubmit(){
+    this.route.navigate(['/home']);
   }
 
 }

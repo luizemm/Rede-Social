@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Person } from 'src/app/models/post/person.model';
+import { PersonService } from 'src/app/services/person.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroPage implements OnInit {
 
-  constructor() { }
+  objPerson : Person = new Person();
+  confirmPass  : String;
+
+  constructor(private personService : PersonService, private route : Router) { }
 
   ngOnInit() {
+  }
+
+  onSubmit(){
+    this.personService.addPerson(this.objPerson);
+    this.route.navigate(['/home']);
   }
 
 }

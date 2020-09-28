@@ -1,24 +1,24 @@
 <ion-content>
   <div class="content">
     <div class="content-child">
-      <form (ngSubmit)="cadastroForm()">
+      <form (ngSubmit)="onSubmit()" #cadastroForm="ngForm">
         <div class="ion-padding">
           <ion-item class="ion-margin radius item-form">
-            <ion-input type="text" placeholder="Nome"></ion-input>
+            <ion-input [(ngModel)]="objPerson.name" name="name" type="text" placeholder="Nome"></ion-input>
           </ion-item>
           <ion-item class="ion-margin radius item-form">
-            <ion-input type="text" placeholder="Data de nascimento"></ion-input>
+            <ion-input [(ngModel)]="objPerson.dateBirth" name="date" type="text" placeholder="Data de nascimento"></ion-input>
           </ion-item>
           <ion-item class="ion-margin radius item-form">
-            <ion-input type="text" placeholder="Email"></ion-input>
+            <ion-input [(ngModel)]="objPerson.email" name="email" type="text" placeholder="Email"></ion-input>
           </ion-item>
           <ion-item class="ion-margin radius item-form">
-            <ion-input type="password" placeholder="Senha"></ion-input>
+            <ion-input [(ngModel)]="objPerson.password" name="password" type="password" placeholder="Senha"></ion-input>
           </ion-item>
           <ion-item class="ion-margin radius item-form">
-            <ion-input type="password" placeholder="Confirmar Senha"></ion-input>
+            <ion-input [(ngModel)]="confirmPass" name="confirmpass" type="password" placeholder="Confirmar Senha"></ion-input>
           </ion-item>
-          <ion-button class="ion-margin botao-cadastro" routerLink="/home" expand="block">Cadastro</ion-button>
+          <ion-button type="submit" class="ion-margin botao-cadastro" expand="block">Cadastro</ion-button>
         </div>
       </form>
   

@@ -6,7 +6,7 @@ import { post } from '../models/post/post.module';
 })
 export class PostService {
 
-  _listPost : post[] = [
+  private _listPost : post[] = [
     {
       id: 2,
       name : "Igor",
