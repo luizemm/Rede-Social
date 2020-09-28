@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { post } from 'src/app/models/post/post.module';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-new-post',
@@ -8,12 +11,21 @@ import { Component, OnInit } from '@angular/core';
 export class NewPostPage implements OnInit {
 
   private picture : String = '../../../assets/pictures/default profile.jpg';
-  //private textarea_height : String;
+  post : post = new post();
 
-  constructor() { }
+  constructor(private postService : PostService, private route : Router) { }
 
   ngOnInit() {
-    //this.textarea_height = (window.innerHeight - 56 * 3 - 16 * 4 - 24 - 2) + 'px';
+    
+  }
+
+  onSubmit(){
+    this.post.name = 'teste';
+    this.post.picture = '../../assets/pictures/default profile.jpg';
+    this.post.time = '1h';
+    this.postService.addPost(this.post);
+    this.post = new post();
+    this.route.navigate(['/home']);
   }
 
 }

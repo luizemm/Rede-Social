@@ -37,21 +37,16 @@ export class PostService {
       comment : 25,
       share : 40
     },
-    {
-      id: 4,
-      name : "Fernando",
-      picture : "../../../assets/pictures/default profile.jpg",
-      time : "12h",
-      text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean congue mauris nec massa laoreet, suscipit facilisis ipsum accumsan. Mauris nibh nulla, dictum et sem sit amet, tincidunt sodales lorem. Proin nunc lacus, vehicula vitae arcu sit amet, mollis pulvinar ipsum. Pellentesque a quam sed odio pulvinar hendrerit ac blandit eros. Maecenas ligula massa, mollis id purus ac, rutrum dignissim felis. Maecenas elementum odio eu mauris convallis feugiat. Aliquam erat volutpat. Fusce vitae sem nec elit eleifend vehicula sed et leo.",
-      like : 50,
-      comment : 25,
-      share : 40
-    }
   ];
 
   constructor() { }
 
   getListPost() {return this._listPost;}
+
+  addPost(post:post) {
+    post.id = this._listPost.length + 1;
+    this._listPost.push(post);
+  }
 
   getPostById(id:Number) {
     for(let post of this._listPost){

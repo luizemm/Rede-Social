@@ -7,23 +7,25 @@
     <div class="ion-padding profile">
       <img class="profile-pic" [src]="picture" alt="profile">
     </div>
-    <div class="textarea">
-      <textarea class="post" maxlength="240" placeholder="Digite algo que deseja."></textarea>
-    </div>
-    <div class="ion-padding options">
-      <ion-buttons class="icons-option">
-        <ion-icon name="camera-outline"></ion-icon>
-      </ion-buttons>
-      <ion-buttons class="icons-option">
-        <ion-icon name="image-outline"></ion-icon>
-      </ion-buttons>
-      <ion-buttons class="icons-option">
-        <ion-icon name="happy-outline"></ion-icon>
-      </ion-buttons>
-      <ion-buttons class="icon-end-option">
-        <ion-icon name="send-outline"></ion-icon>
-      </ion-buttons>
-    </div>
+    <form (ngSubmit)="onSubmit()" #postForm="ngForm">
+      <div class="textarea">
+        <textarea [(ngModel)]="post.text" name="text" class="post" maxlength="240" placeholder="Digite algo que deseja."></textarea>
+      </div>
+      <div class="ion-padding options">
+        <ion-buttons class="icons-option">
+          <ion-icon name="camera-outline"></ion-icon>
+        </ion-buttons>
+        <ion-buttons class="icons-option">
+          <ion-icon name="image-outline"></ion-icon>
+        </ion-buttons>
+        <ion-buttons class="icons-option">
+          <ion-icon name="happy-outline"></ion-icon>
+        </ion-buttons>
+        <button class="icon-end-option" type="submit">
+          <ion-icon name="send-outline"></ion-icon>
+        </button>
+      </div>
+    </form>
   </div>
 </ion-content>
 

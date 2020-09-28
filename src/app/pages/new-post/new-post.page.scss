@@ -25,9 +25,13 @@ div.profile {
 
 /* Estilos textarea */
 
-div.textarea {
+form{
     width: 100%;
     height: calc(100% - 56px - 24px - 16px * 4 - 2px); // total - div profile - div options - padding das divs - borda das divs
+}
+
+div.textarea {
+    height: 100%;
 }
 
 textarea.post {
@@ -61,4 +65,11 @@ textarea.post:focus {
 .icon-end-option  {
     font-size: 1.5rem;
     margin-left: auto;
+    background-color: #121212;
+    color: #ffffff;
+    padding: 0;
+}
+
+.icon-end-option:focus {
+    outline: none;
 }
