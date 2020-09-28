@@ -4,6 +4,10 @@
     border-bottom: 0.0625rem solid #3e3e3e;
 }
 
+.post-border:focus {
+    outline: none;
+}
+
 /* Display flex*/
 
 .flex {

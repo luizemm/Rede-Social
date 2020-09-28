@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { post } from 'src/app/models/post/post.module';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-home',
@@ -8,50 +9,11 @@ import { post } from 'src/app/models/post/post.module';
 })
 export class HomePage implements OnInit {
 
-  posts : post[] = [
-    {
-      id: 1,
-      name : "Luiz Eduardo",
-      picture : "../../../assets/pictures/default profile.jpg",
-      time : "12h",
-      text : "texto texto texto texto texto texto texto",
-      like : 50,
-      comment : 25,
-      share : 40
-    },
-    {
-      id: 2,
-      name : "Luiz Eduardo",
-      picture : "../../../assets/pictures/default profile.jpg",
-      time : "12h",
-      text : "texto texto texto texto texto texto texto",
-      like : 50,
-      comment : 25,
-      share : 40
-    },
-    {
-      id: 3,
-      name : "Luiz Eduardo",
-      picture : "../../../assets/pictures/default profile.jpg",
-      time : "12h",
-      text : "texto texto texto texto texto texto texto",
-      like : 50,
-      comment : 25,
-      share : 40
-    },
-    {
-      id: 4,
-      name : "Luiz Eduardo",
-      picture : "../../../assets/pictures/default profile.jpg",
-      time : "12h",
-      text : "texto texto texto texto texto texto texto",
-      like : 50,
-      comment : 25,
-      share : 40
-    }
-  ];
+  posts : post[];
 
-  constructor() { }
+  constructor(private postService : PostService) {
+    this.posts = postService.getListPost();
+  }
 
   ngOnInit() {
   }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { post } from 'src/app/models/post/post.module';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-comments',
@@ -8,20 +10,13 @@ import { post } from 'src/app/models/post/post.module';
 })
 export class CommentsPage implements OnInit {
 
-  post : post = {
-    id: 1,
-    name : "Luiz Eduardo",
-    picture : "../../../assets/pictures/default profile.jpg",
-    time : "12h",
-    text : "texto texto texto texto texto texto texto",
-    like : 50,
-    comment : 25,
-    share : 40
-  }
+  post : post;
 
-  constructor() { }
+  constructor(private postService : PostService,
+    private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.post = this.postService.getPostById(this.route.snapshot.params['id']);
   }
 
 }
