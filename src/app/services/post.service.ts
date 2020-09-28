@@ -8,16 +8,6 @@ export class PostService {
 
   _listPost : post[] = [
     {
-      id: 1,
-      name : "Luiz Eduardo",
-      picture : "../../../assets/pictures/default profile.jpg",
-      time : "12h",
-      text : "texto texto texto texto texto texto texto",
-      like : 50,
-      comment : 25,
-      share : 40
-    },
-    {
       id: 2,
       name : "Igor",
       picture : "../../../assets/pictures/default profile.jpg",
@@ -28,15 +18,15 @@ export class PostService {
       share : 40
     },
     {
-      id: 3,
-      name : "Maria",
+      id: 1,
+      name : "Luiz Eduardo",
       picture : "../../../assets/pictures/default profile.jpg",
       time : "12h",
-      text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      text : "texto texto texto texto texto texto texto",
       like : 50,
       comment : 25,
       share : 40
-    },
+    }
   ];
 
   constructor() { }
@@ -45,7 +35,7 @@ export class PostService {
 
   addPost(post:post) {
     post.id = this._listPost.length + 1;
-    this._listPost.push(post);
+    this._listPost.unshift(post);
   }
 
   getPostById(id:Number) {
