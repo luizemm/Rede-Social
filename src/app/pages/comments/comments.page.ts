@@ -11,12 +11,27 @@ import { PostService } from 'src/app/services/post.service';
 export class CommentsPage implements OnInit {
 
   post : post;
+  listPost : post[] = [];
+  comment : post = new post();
 
   constructor(private postService : PostService,
-    private route : ActivatedRoute) { }
+    private route : ActivatedRoute) {
+      this.post = this.postService.getPostById(Number.parseInt(this.route.snapshot.paramMap.get('id')));
+      for(let comment of this.post.comments){
+        this.listPost.push(postService.getPostById(comment));
+      }
+    }
 
   ngOnInit() {
-    this.post = this.postService.getPostById(this.route.snapshot.params['id']);
+    
   }
 
+  onSubmit(){
+    this.comment.name = 'teste';
+    this.comment.picture = '../../assets/pictures/default profile.jpg';
+    this.comment.time = '1h';
+    this.postService.addComment(this.post.id, this.comment);
+    this.listPost.unshift(this.postService.getPostById(this.post.comments[0]))
+    this.comment = new post();
+  }
 }

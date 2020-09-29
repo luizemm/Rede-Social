@@ -5,12 +5,13 @@ export class post {
   time : String;
   text : String;
   like : Number;
-  comment : Number;
+  comments : Number[];
+  isComment : Boolean;
   share : Number;
 
   constructor(){
     this.like = 0;
-    this.comment = 0;
+    this.comments = [];
     this.share = 0;
   }
 }

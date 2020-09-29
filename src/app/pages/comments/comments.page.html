@@ -10,14 +10,14 @@
   </div>
   <app-post [post]="post"></app-post>
   <div class="comment">
-    <ion-input class="comment-input" type="text" placeholder="Comente algo..."></ion-input>
-    <ion-buttons class="send-comment" slot="end">
+    <ion-input [(ngModel)]="comment.text" class="comment-input" type="text" placeholder="Comente algo..."></ion-input>
+    <ion-buttons (click)="onSubmit()" class="send-comment" slot="end">
       <ion-icon class="icone" id="search" name="send-outline"></ion-icon>
     </ion-buttons>
   </div>
-  <app-post [post]="post"></app-post>
-  <app-post [post]="post"></app-post>
-  <app-post [post]="post"></app-post>
+  <div *ngFor="let comment of listPost">
+    <app-post [post]="comment"></app-post>
+  </div>
 </ion-content>
 
 <ion-footer>

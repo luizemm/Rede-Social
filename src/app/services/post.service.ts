@@ -8,13 +8,25 @@ export class PostService {
 
   private _listPost : post[] = [
     {
+      id: 3,
+      name : "Fulano",
+      picture : "../../../assets/pictures/default profile.jpg",
+      time : "12h",
+      text : "texto texto texto texto texto texto texto",
+      like : 23,
+      comments : [],
+      isComment : true,
+      share : 2
+    },
+    {
       id: 2,
       name : "Igor",
       picture : "../../../assets/pictures/default profile.jpg",
       time : "12h",
       text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean congue mauris nec massa laoreet, suscipit facilisis ipsum accumsan. Mauris nibh nulla, dictum et sem sit amet, tincidunt sodales lorem. Proin nunc lacus, vehicula vitae arcu sit amet, mollis pulvinar ipsum. Pellentesque a quam sed odio pulvinar hendrerit ac blandit eros. ",
       like : 50,
-      comment : 25,
+      comments : [],
+      isComment : false,
       share : 40
     },
     {
@@ -24,23 +36,33 @@ export class PostService {
       time : "12h",
       text : "texto texto texto texto texto texto texto",
       like : 50,
-      comment : 25,
+      comments : [3],
+      isComment : false,
       share : 40
     }
   ];
 
   constructor() { }
 
-  getListPost() {return this._listPost;}
+  getListPost() : post[] {return this._listPost;}
 
   addPost(post:post) {
-    post.id = this._listPost.length + 1;
-    this._listPost.unshift(post);
+    post.id = this.getListPost().length + 1;
+    post.isComment = false;
+    this.getListPost().unshift(post);
   }
 
-  getPostById(id:Number) {
+  addComment(id:Number, post:post){
+    let objPost = this.getPostById(id);
+    post.id = this.getListPost().length + 1;
+    post.isComment = true;
+    this.getListPost().unshift(post);
+    objPost.comments.unshift(post.id);
+  }
+
+  getPostById(id:Number) : post{
     for(let post of this._listPost){
-      if(id == post.id)
+      if(id === post.id)
         return post;
     }
   }
