@@ -33,6 +33,10 @@ export class AppComponent implements OnInit {
     this.initializeApp();
   }
 
+  logoff(){
+    localStorage['login'] = null;
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

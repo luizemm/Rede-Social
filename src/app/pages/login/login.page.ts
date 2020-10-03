@@ -15,11 +15,11 @@ export class LoginPage implements OnInit {
   constructor(private personService : PersonService, private route : Router) { }
 
   ngOnInit() {
+    
   }
 
   onSubmit(){
-    localStorage['login'] = this.personService.getPersonByEmail('admin@admin.com')
+    localStorage['login'] = 'admin@admin.com';
     this.route.navigate(['/home']);
   }
-
 }
