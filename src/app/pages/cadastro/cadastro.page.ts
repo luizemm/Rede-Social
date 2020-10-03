@@ -19,7 +19,9 @@ export class CadastroPage implements OnInit {
   }
 
   onSubmit(){
+    this.objPerson.picture = '../../assets/pictures/default profile.jpg';
     this.personService.addPerson(this.objPerson);
+    localStorage['login'] = this.objPerson;
     this.route.navigate(['/home']);
   }
 

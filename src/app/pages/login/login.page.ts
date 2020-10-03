@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
   }
 
   onSubmit(){
+    localStorage['login'] = this.personService.getPersonByEmail('admin@admin.com')
     this.route.navigate(['/home']);
   }
 

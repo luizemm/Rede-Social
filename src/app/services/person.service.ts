@@ -8,7 +8,8 @@ export class PersonService {
 
   private _listPerson : Person[] = [
     {
-      name : 'admin',
+      name : 'Fulano',
+      picture : '../../assets/pictures/default profile.jpg',
       dateBirth : '01/01/2000',
       email : 'admin@admin.com',
       password : 'admin'
@@ -21,5 +22,14 @@ export class PersonService {
 
   addPerson(objPerson : Person) {
     this._listPerson.push(objPerson);
+  }
+
+  getPersonByEmail(email : String) : Person{
+    for(let person of this.getListPerson()){
+      if(person.email == email)
+        return person;
+    }
+
+    return null;
   }
 }
