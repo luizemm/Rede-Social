@@ -19,10 +19,12 @@ export class CadastroPage implements OnInit {
   }
 
   onSubmit(){
-    this.objPerson.picture = '../../assets/pictures/default profile.jpg';
-    this.personService.addPerson(this.objPerson);
-    localStorage['login'] = this.objPerson.email;
-    this.route.navigate(['/home']);
+    try {
+      this.personService.addPerson(this.objPerson);
+      this.route.navigate(['/login']);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 }

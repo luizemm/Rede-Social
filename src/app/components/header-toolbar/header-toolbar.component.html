@@ -5,6 +5,11 @@
   <div id="logo">
     <ion-img [src]="img" class="logo"></ion-img>
   </div>
+  <div hidden="true">
+    <form  (ngSubmit)="onSubmit()">
+      <input [(ngModel)]="search" name="search" type="text" />
+    </form>
+  </div>
   <ion-buttons class="botao-icone" slot="end">
     <ion-icon class="icone" id="search" name="search-outline"></ion-icon>
   </ion-buttons>

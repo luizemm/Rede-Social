@@ -9,6 +9,8 @@ export class HeaderToolbarComponent implements OnInit {
 
   private img : String = "../../assets/pictures/logo twitter.png";
 
+  search: String;
+
   constructor() { }
 
   ngOnInit() {}

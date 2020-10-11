@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { PersonService } from 'src/app/services/person.service';
 
 @Component({
@@ -12,14 +13,18 @@ export class LoginPage implements OnInit {
   user : String;
   password : String;
 
-  constructor(private personService : PersonService, private route : Router) { }
+  constructor(private personService : PersonService, private route : Router, private auth : AuthGuardService) { }
 
   ngOnInit() {
     
   }
 
   onSubmit(){
-    localStorage['login'] = 'admin@admin.com';
-    this.route.navigate(['/home']);
+    try {
+      this.auth.signIn(this.user, this.password);
+      this.route.navigate(["home"]);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from 'src/app/models/person.model';
 import { post } from 'src/app/models/post.module';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { PersonService } from 'src/app/services/person.service';
 import { PostService } from 'src/app/services/post.service';
 
@@ -19,10 +20,17 @@ export class CommentsPage implements OnInit {
 
   constructor(private postService : PostService,
     private personService : PersonService,
-    private route : ActivatedRoute) 
+    private route : ActivatedRoute,
+    private auth: AuthGuardService) 
   {
     this.post = this.postService.getPostById(Number.parseInt(this.route.snapshot.paramMap.get('id')));
-    this.person = this.personService.getPersonByEmail(localStorage['login']);
+    
+    try {
+      this.person = this.auth.getUserLoged();
+    } catch (error) {
+      console.log(error);
+    }
+
     for(let comment of this.post.comments){
       this.listPost.push(postService.getPostById(comment));
     }

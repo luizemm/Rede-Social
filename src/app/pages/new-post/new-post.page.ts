@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Person } from 'src/app/models/person.model';
 import { post } from 'src/app/models/post.module';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { PersonService } from 'src/app/services/person.service';
 import { PostService } from 'src/app/services/post.service';
 
@@ -17,9 +18,14 @@ export class NewPostPage implements OnInit {
 
   constructor(private postService : PostService,
      private personService : PersonService,
-     private route : Router) 
+     private route : Router,
+     private auth: AuthGuardService) 
   { 
-    this.person = personService.getPersonByEmail(localStorage['login']);
+    try {
+      this.person = this.auth.getUserLoged();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   ngOnInit() {
