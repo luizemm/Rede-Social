@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Person } from 'src/app/models/person.model';
+import { MensagensService } from 'src/app/services/mensagens.service';
 import { PersonService } from 'src/app/services/person.service';
 
 @Component({
@@ -13,7 +14,10 @@ export class CadastroPage implements OnInit {
   objPerson : Person = new Person();
   confirmPass  : String;
 
-  constructor(private personService : PersonService, private route : Router) { }
+  constructor(
+    private personService : PersonService,
+    private route : Router,
+    private mensagenService: MensagensService) { }
 
   ngOnInit() {
   }
@@ -23,7 +27,7 @@ export class CadastroPage implements OnInit {
       this.personService.addPerson(this.objPerson);
       this.route.navigate(['/login']);
     } catch (error) {
-      console.log(error);
+      this.mensagenService.addMensagem(error);
     }
   }
 

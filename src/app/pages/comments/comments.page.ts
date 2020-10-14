@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Person } from 'src/app/models/person.model';
 import { post } from 'src/app/models/post.module';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { MensagensService } from 'src/app/services/mensagens.service';
 import { PersonService } from 'src/app/services/person.service';
 import { PostService } from 'src/app/services/post.service';
 
@@ -21,14 +22,15 @@ export class CommentsPage implements OnInit {
   constructor(private postService : PostService,
     private personService : PersonService,
     private route : ActivatedRoute,
-    private auth: AuthGuardService) 
+    private auth: AuthGuardService,
+    private mensagemService: MensagensService) 
   {
     this.post = this.postService.getPostById(Number.parseInt(this.route.snapshot.paramMap.get('id')));
     
     try {
       this.person = this.auth.getUserLoged();
     } catch (error) {
-      console.log(error);
+      this.mensagemService.addMensagem(error);
     }
 
     for(let comment of this.post.comments){
