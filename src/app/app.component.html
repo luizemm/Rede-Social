@@ -10,23 +10,29 @@
           </ion-row>
           <ion-row>
             <ion-col class="flex ion-justify-content-center">
-              <h4 class="name-menu">Luiz Eduardo</h4>
+              <h4 class="name-menu">{{person.name}}</h4>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col class="flex ion-justify-content-center">
-              <span class="follow-menu">24 Seguidores</span>
+              <span class="follow-menu">{{person.followers.length}} Seguidores</span>
             </ion-col>
             <ion-col class="flex ion-justify-content-center">
-              <span class="follow-menu">120 Seguindo</span>
+              <span class="follow-menu">{{person.following.length}} Seguindo</span>
             </ion-col>
           </ion-row>
         </ion-grid>
         <ion-list id="inbox-list">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i; selectedIndex == 1 ? logoff() : none" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+            <ion-item routerDirection="root" (click)="selectedIndex = i;" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-outline'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item (click)="logoff()" routerDirection="root" [routerLink]="['/login']" lines="none" detail="false">
+              <ion-icon slot="start" [ios]="'exit-outline'" [md]="'exit-outline'"></ion-icon>
+              <ion-label>Sair</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

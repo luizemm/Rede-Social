@@ -1,0 +1,46 @@
+#perfil {
+  
+  color: #dfdfdf;
+  border-bottom: 0.0625rem solid #3e3e3e;
+
+  #backgroud-cover {
+    height: 149px;
+    background-color: red;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  #info {
+    text-align: center;
+    margin-top: -65px;
+
+    .text-follow {
+      font-size: 14px;
+    }
+
+    .followers {
+      margin-right: 20px;
+    }
+
+    .following {
+      margin-left: 20px;
+    }
+
+    .image {
+      border-radius: 50%;
+      height: 120px;
+      width: 120px;
+    }
+
+    .name {
+      font-size: 19px;
+      margin-top: 20px;
+    }
+  }
+
+  #desc {
+    margin: 40px 0;
+    padding: 0 20px;
+    font-size: 16px;
+  }
+}

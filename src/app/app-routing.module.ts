@@ -31,7 +31,13 @@ const routes: Routes = [
   {
     path: 'comments/:id',
     loadChildren: () => import('./pages/comments/comments.module').then( m => m.CommentsPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule),
+    canActivate: [AuthGuardService]
   }
+
 ];
 
 @NgModule({

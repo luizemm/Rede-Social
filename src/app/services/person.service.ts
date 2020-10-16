@@ -9,10 +9,14 @@ export class PersonService {
   private _listPerson: Person[] = [
     {
       name: 'Fulano',
-      picture: '../../assets/pictures/default profile.jpg',
+      picture: '/assets/pictures/default-profile.jpg',
+      cover: '/assets/pictures/default-cover.jpg',
       dateBirth: '01/01/2000',
       email: 'admin@admin.com',
-      password: 'admin'
+      password: 'admin',
+      followers: [],
+      following: [],
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum interdum mi nec lectus consequat, et porta quam consequat. Donec dolor libero, euismod at congue vel, vehicula sit amet lorem.'
     }
   ]
 
@@ -21,12 +25,16 @@ export class PersonService {
   getListPerson(): Person[] { return this._listPerson; }
 
   addPerson(objPerson: Person) {
-    if (objPerson.picture) {
-      objPerson.picture = '../../assets/pictures/default profile.jpg';
-    }
-
     if (this.isStringEmpty(objPerson.name)) {
       throw new Error("Name can't be empty.");
+    }
+
+    if (objPerson.picture) {
+      objPerson.picture = '/assets/pictures/default-profile.jpg';
+    }
+
+    if (objPerson.cover) {
+      objPerson.cover = '/assets/pictures/default-cover.jpg';
     }
 
     if (this.isStringEmpty(objPerson.email)) {
@@ -35,6 +43,13 @@ export class PersonService {
 
     if (this.isStringEmpty(objPerson.password)) {
       throw new Error("Password can't be empty.");
+    }
+
+    objPerson.followers = new Array<Person>();
+    objPerson.following = new Array<Person>();
+    
+    if (this.isStringEmpty(objPerson.description)) {
+      objPerson.description = "";
     }
 
     this._listPerson.push(objPerson);

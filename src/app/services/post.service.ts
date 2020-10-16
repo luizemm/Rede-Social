@@ -10,7 +10,7 @@ export class PostService {
     {
       id: 3,
       name : "Fulano",
-      picture : "../../../assets/pictures/default profile.jpg",
+      picture : "/assets/pictures/default-profile.jpg",
       time : "12h",
       text : "texto texto texto texto texto texto texto",
       like : 23,
@@ -21,7 +21,7 @@ export class PostService {
     {
       id: 2,
       name : "Igor",
-      picture : "../../../assets/pictures/default profile.jpg",
+      picture : "/assets/pictures/default-profile.jpg",
       time : "12h",
       text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean congue mauris nec massa laoreet, suscipit facilisis ipsum accumsan. Mauris nibh nulla, dictum et sem sit amet, tincidunt sodales lorem. Proin nunc lacus, vehicula vitae arcu sit amet, mollis pulvinar ipsum. Pellentesque a quam sed odio pulvinar hendrerit ac blandit eros. ",
       like : 50,
@@ -32,7 +32,7 @@ export class PostService {
     {
       id: 1,
       name : "Luiz Eduardo",
-      picture : "../../../assets/pictures/default profile.jpg",
+      picture : "/assets/pictures/default-profile.jpg",
       time : "12h",
       text : "texto texto texto texto texto texto texto",
       like : 50,
@@ -65,5 +65,9 @@ export class PostService {
       if(id === post.id)
         return post;
     }
+  }
+
+  getPostByUser(name: String): post[] {
+    return this.getListPost().filter(x => x.name == name);
   }
 }

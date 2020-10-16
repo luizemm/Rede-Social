@@ -10,7 +10,7 @@ import { PersonService } from 'src/app/services/person.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  img : String = "../../assets/pictures/logo twitter.png";
+  img : String = "/assets/pictures/logo twitter.png";
   user : String;
   password : String;
 

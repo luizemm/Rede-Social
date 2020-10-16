@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthGuardService } from './services/auth-guard.service';
+import { Person } from './models/person.model';
 
 @Component({
   selector: 'app-root',
@@ -14,17 +15,18 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'Perfil',
+      title: 'Home',
       url: '/home',
-      icon: 'person'
+      icon: 'home'
     },
     {
-      title: 'Sair',
-      url: '/login',
-      icon: 'exit'
+      title: 'Perfil',
+      url: '/perfil',
+      icon: 'person'
     }
   ];
-  public profileImg ='../assets/pictures/default profile.jpg'
+  public profileImg ='/assets/pictures/default-profile.jpg';
+  person: Person = new Person();
 
   constructor(
     private platform: Platform,
@@ -51,5 +53,7 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+
+    this.person = this.auth.getUserLoged();
   }
 }
