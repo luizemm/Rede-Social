@@ -26,11 +26,13 @@ const routes: Routes = [
   { path: 'post', component: PostComponent },
   {
     path: 'new-post',
-    loadChildren: () => import('./pages/new-post/new-post.module').then( m => m.NewPostPageModule)
+    loadChildren: () => import('./pages/new-post/new-post.module').then( m => m.NewPostPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'comments/:id',
-    loadChildren: () => import('./pages/comments/comments.module').then( m => m.CommentsPageModule)
+    loadChildren: () => import('./pages/comments/comments.module').then( m => m.CommentsPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'perfil',

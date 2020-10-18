@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { Person } from 'src/app/models/person.model';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { MensagensService } from 'src/app/services/mensagens.service';
 import { PersonService } from 'src/app/services/person.service';
 
@@ -17,7 +19,9 @@ export class CadastroPage implements OnInit {
   constructor(
     private personService : PersonService,
     private route : Router,
-    private mensagenService: MensagensService) { }
+    private mensagenService: MensagensService,
+    private auth : AuthGuardService,
+    private menu : AppComponent) { }
 
   ngOnInit() {
   }
@@ -25,7 +29,9 @@ export class CadastroPage implements OnInit {
   onSubmit(){
     try {
       this.personService.addPerson(this.objPerson);
-      this.route.navigate(['/login']);
+      this.auth.signIn(this.objPerson.email, this.objPerson.password);
+      this.menu.getUserLoged();
+      this.route.navigate(['/home']);
     } catch (error) {
       this.mensagenService.addMensagem(error);
     }

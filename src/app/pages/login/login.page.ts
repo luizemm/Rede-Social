@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { MensagensService } from 'src/app/services/mensagens.service';
 import { PersonService } from 'src/app/services/person.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginPage implements OnInit {
     private personService : PersonService,
     private route : Router,
     private auth : AuthGuardService,
-    private mensagemService: MensagensService) { }
+    private mensagemService: MensagensService,
+    private menu : AppComponent) { }
 
   ngOnInit() {
     
@@ -27,6 +29,7 @@ export class LoginPage implements OnInit {
   onSubmit(){
     try {
       this.auth.signIn(this.user, this.password);
+      this.menu.getUserLoged();
       this.route.navigate(["home"]);
     } catch (error) {
       this.mensagemService.addMensagem(error);

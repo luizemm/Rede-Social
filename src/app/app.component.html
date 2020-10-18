@@ -10,15 +10,15 @@
           </ion-row>
           <ion-row>
             <ion-col class="flex ion-justify-content-center">
-              <h4 class="name-menu">{{person.name}}</h4>
+              <h4 class="name-menu">{{person?.name}}</h4>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col class="flex ion-justify-content-center">
-              <span class="follow-menu">{{person.followers.length}} Seguidores</span>
+              <span class="follow-menu">{{person?.followers.length}} Seguidores</span>
             </ion-col>
             <ion-col class="flex ion-justify-content-center">
-              <span class="follow-menu">{{person.following.length}} Seguindo</span>
+              <span class="follow-menu">{{person?.following.length}} Seguindo</span>
             </ion-col>
           </ion-row>
         </ion-grid>

@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     }
   ];
   public profileImg ='/assets/pictures/default-profile.jpg';
-  person: Person = new Person();
+  person: Person;
 
   constructor(
     private platform: Platform,
@@ -41,6 +41,10 @@ export class AppComponent implements OnInit {
     this.auth.signOut();
   }
 
+  getUserLoged(){
+    this.person = this.auth.getUserLoged();
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -53,7 +57,5 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
-
-    this.person = this.auth.getUserLoged();
   }
 }

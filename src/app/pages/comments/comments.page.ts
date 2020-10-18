@@ -44,6 +44,7 @@ export class CommentsPage implements OnInit {
 
   onSubmit(){
     this.comment.name = this.person.name;
+    this.comment.email = this.person.email;
     this.comment.picture = this.person.picture;
     this.comment.time = '1h';
     this.postService.addComment(this.post.id, this.comment);

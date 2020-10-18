@@ -29,11 +29,11 @@ export class PersonService {
       throw new Error("Name can't be empty.");
     }
 
-    if (objPerson.picture) {
+    if (objPerson.picture == null) {
       objPerson.picture = '/assets/pictures/default-profile.jpg';
     }
 
-    if (objPerson.cover) {
+    if (objPerson.cover == null) {
       objPerson.cover = '/assets/pictures/default-cover.jpg';
     }
 

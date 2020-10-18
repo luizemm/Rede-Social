@@ -17,12 +17,13 @@ export class PerfilPage implements OnInit {
   constructor(
     private auth: AuthGuardService,
     private postService: PostService
-  ) { }
+  ) {
+    this.person = this.auth.getUserLoged();
+    this.posts = this.postService.getPostByEmail(this.person.email);
+   }
 
   ngOnInit() {
-    this.person = this.auth.getUserLoged();
-    this.posts = this.postService.getPostByUser(this.person.name);
-    console.log(this.posts);
+
   }
 
 }

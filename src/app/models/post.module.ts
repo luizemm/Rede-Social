@@ -1,6 +1,7 @@
 export class post {
   id : Number;
   name : String;
+  email : String;
   picture : String;
   time : String;
   text : String;
