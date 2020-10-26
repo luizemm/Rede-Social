@@ -27,14 +27,13 @@ export class CadastroPage implements OnInit {
   }
 
   onSubmit(){
-    try {
-      this.personService.addPerson(this.objPerson);
+    this.personService.addPerson(this.objPerson).then(() => {
       this.auth.signIn(this.objPerson.email, this.objPerson.password);
       this.menu.getUserLoged();
       this.route.navigate(['/home']);
-    } catch (error) {
+    }).catch((error) => {
       this.mensagenService.addMensagem(error);
-    }
+    });
   }
 
 }

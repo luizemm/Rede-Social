@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Person } from '../models/person.model';
 
 @Injectable({
@@ -6,21 +7,9 @@ import { Person } from '../models/person.model';
 })
 export class PersonService {
 
-  private _listPerson: Person[] = [
-    {
-      name: 'Fulano',
-      picture: '/assets/pictures/default-profile.jpg',
-      cover: '/assets/pictures/default-cover.jpg',
-      dateBirth: '01/01/2000',
-      email: 'admin@admin.com',
-      password: 'admin',
-      followers: [],
-      following: [],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum interdum mi nec lectus consequat, et porta quam consequat. Donec dolor libero, euismod at congue vel, vehicula sit amet lorem.'
-    }
-  ]
+  private _listPerson: Person[];
 
-  constructor() { }
+  constructor(private firestore : AngularFirestore) { }
 
   getListPerson(): Person[] { return this._listPerson; }
 
@@ -45,23 +34,38 @@ export class PersonService {
       throw new Error("Password can't be empty.");
     }
 
-    objPerson.followers = new Array<Person>();
-    objPerson.following = new Array<Person>();
+    objPerson.followers = new Array<String>();
+    objPerson.following = new Array<String>();
     
     if (this.isStringEmpty(objPerson.description)) {
       objPerson.description = "";
     }
 
-    this._listPerson.push(objPerson);
+    delete objPerson.id;
+    console.log(objPerson);
+    return this.firestore.collection('Person').add(objPerson);
   }
 
-  getPersonByEmail(email: String): Person {
-    for (let person of this.getListPerson()) {
-      if (person.email == email)
-        return person;
-    }
-
-    return null;
+  getPersonByEmail(email: String) {
+    return this.firestore.collection('Person').doc('bCUFRw1uugV8h9G3Hm04').ref.get().then((person)=>{
+      if(person.exists) {
+        const dadosCliente = person.data();
+        return {
+          id: person.id,
+          name: dadosCliente.name,
+          picture: dadosCliente.picture,
+          cover: dadosCliente.cover,
+          dateBirth: dadosCliente.dateBirth,
+          email: dadosCliente.email,
+          password: dadosCliente.password,
+          followers: dadosCliente.followers,
+          following: dadosCliente.following,
+          description: dadosCliente.description,
+        };
+      }
+      console.log('teste')
+      return null;
+    });
   }
 
   private isStringEmpty(string: String): boolean {

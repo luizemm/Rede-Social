@@ -1,12 +1,13 @@
 export class Person {
+    id: String;
     name : String;
     picture : String;
     cover: String;
     dateBirth : String;
     email : String;
     password : String;
-    followers: Person[];
-    following: Person[];
+    followers: String[];
+    following: String[];
     description: String;
 
  constructor(){}

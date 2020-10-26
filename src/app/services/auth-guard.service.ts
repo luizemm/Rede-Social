@@ -22,17 +22,17 @@ export class AuthGuardService implements CanActivate {
     return true;
   }
 
-  signIn(email: String, password: String) {
-    let person = this.personService.getPersonByEmail(email);
-
-    if (person) {
-      if (person.password === password)
-        this.userLoged = person;
+  signIn(email: String, password: String){
+    this.personService.getPersonByEmail(email).then((person)=>{
+      if (person) {
+        if (person.password === password)
+          this.userLoged = person;
+        else
+          throw new Error("Invalid email or password.");
+      }
       else
         throw new Error("Invalid email or password.");
-    }
-    else
-      throw new Error("Invalid email or password.");
+    });
   }
 
   signOut() {
