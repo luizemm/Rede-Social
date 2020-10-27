@@ -1,20 +1,20 @@
-<ion-grid [routerLink]="['/comments', post.id]" class="post-border" fixed>
+<ion-grid [routerLink]="['/comments/', post?.id]" class="post-border" fixed>
   <ion-row>
     <ion-col>
       <ion-row>
         <ion-col class="ion-align-items-center flex">
-          <img class="profile-pic same-line" [src]="post.picture" alt="profile">
+          <img class="profile-pic same-line" [src]="post?.picture" alt="profile">
           <div class="same-line">
-            <span class="same-line" id="name">{{post.name}}</span>
+            <span class="same-line" id="name">{{post?.name}}</span>
             <ion-icon class="icon same-line gray" id="circle" name="ellipse"></ion-icon>
-            <span class="same-line amount gray" id="time">{{post.time}}</span>
+            <span class="same-line amount gray" id="time">{{post?.time}}</span>
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <span>
-            {{post.text}}
+            {{post?.text}}
           </span>
         </ion-col>
       </ion-row>
@@ -22,15 +22,15 @@
     <ion-col size="1.5" class="flex direction ion-justify-content-end ion-align-items-end">
       <ion-buttons class="button-margin ion-align-items-center">
         <ion-icon class="gray tiny-margin" name="share-social-outline"></ion-icon>
-        <span class="amount gray">{{post.share}}</span>
+        <span class="amount gray">{{post?.share}}</span>
       </ion-buttons>
       <ion-buttons class="button-margin ion-align-items-center">
         <ion-icon class="gray tiny-margin" name="chatbox-outline"></ion-icon>
-        <span class="amount gray">{{post.comments.length}}</span>
+        <span class="amount gray">{{post?.comments.length}}</span>
       </ion-buttons>
       <ion-buttons class="ion-align-items-center">
         <ion-icon class="gray tiny-margin" name="thumbs-up-outline"></ion-icon>
-        <span class="amount gray">{{post.like}}</span>
+        <span class="amount gray">{{post?.like}}</span>
       </ion-buttons>
     </ion-col>
   </ion-row>

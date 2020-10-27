@@ -1,12 +1,12 @@
 export class post {
-  id : Number;
+  id : string;
   name : String;
   email : String;
   picture : String;
   time : String;
   text : String;
   like : Number;
-  comments : Number[];
+  comments : string[];
   isComment : Boolean;
   share : Number;
 

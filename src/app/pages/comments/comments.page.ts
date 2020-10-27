@@ -25,16 +25,20 @@ export class CommentsPage implements OnInit {
     private auth: AuthGuardService,
     private mensagemService: MensagensService) 
   {
-    this.post = this.postService.getPostById(Number.parseInt(this.route.snapshot.paramMap.get('id')));
+    this.postService.getPostById(this.route.snapshot.paramMap.get('id')).then((objPost)=>{
+      this.post = objPost;
+      
+      for(let comment of this.post.comments){
+        postService.getPostById(comment).then((objPost)=>{
+          this.listPost.push(objPost);
+        })
+      }
+    });
     
     try {
       this.person = this.auth.getUserLoged();
     } catch (error) {
       this.mensagemService.addMensagem(error);
-    }
-
-    for(let comment of this.post.comments){
-      this.listPost.push(postService.getPostById(comment));
     }
   }
 
@@ -48,7 +52,9 @@ export class CommentsPage implements OnInit {
     this.comment.picture = this.person.picture;
     this.comment.time = '1h';
     this.postService.addComment(this.post.id, this.comment);
-    this.listPost.unshift(this.postService.getPostById(this.post.comments[0]))
+    this.postService.getPostById(this.post.comments[0]).then((post)=>{
+      this.listPost.unshift(post);
+    })
     this.comment = new post();
   }
 }

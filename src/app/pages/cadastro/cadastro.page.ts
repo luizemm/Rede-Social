@@ -5,6 +5,7 @@ import { Person } from 'src/app/models/person.model';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { MensagensService } from 'src/app/services/mensagens.service';
 import { PersonService } from 'src/app/services/person.service';
+import { Callback } from 'src/app/Utils/callback';
 
 @Component({
   selector: 'app-cadastro',
@@ -28,9 +29,15 @@ export class CadastroPage implements OnInit {
 
   onSubmit(){
     this.personService.addPerson(this.objPerson).then(() => {
-      this.auth.signIn(this.objPerson.email, this.objPerson.password);
-      this.menu.getUserLoged();
-      this.route.navigate(['/home']);
+      this.auth.signIn(this.objPerson.email, this.objPerson.password, new Callback(
+        () => {
+          this.menu.getUserLoged();
+          this.route.navigate(['/home']);
+        },
+        (msg) => {
+          this.mensagenService.addMensagem(msg);
+        }
+      ));
     }).catch((error) => {
       this.mensagenService.addMensagem(error);
     });

@@ -12,7 +12,23 @@ export class HomePage implements OnInit {
   posts : post[];
 
   constructor(private postService : PostService) {
-    this.posts = postService.getListPost();
+    postService.getListPost().subscribe((listPost)=>{
+      this.posts = listPost.map((item)=>{
+        const postData = item.payload.doc.data();
+        return {
+          id: item.payload.doc.id,
+          name: postData['name'],
+          email: postData['email'],
+          picture: postData['picture'],
+          time: postData['time'],
+          text: postData['text'],
+          like: postData['like'],
+          comments: postData['comments'],
+          isComment: postData['isComment'],
+          share: postData['share'],
+        }
+      })
+    });
   }
 
   ngOnInit() {

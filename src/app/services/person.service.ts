@@ -42,30 +42,12 @@ export class PersonService {
     }
 
     delete objPerson.id;
-    console.log(objPerson);
-    return this.firestore.collection('Person').add(objPerson);
+
+    return this.firestore.collection('Person').add({...objPerson});
   }
 
   getPersonByEmail(email: String) {
-    return this.firestore.collection('Person').doc('bCUFRw1uugV8h9G3Hm04').ref.get().then((person)=>{
-      if(person.exists) {
-        const dadosCliente = person.data();
-        return {
-          id: person.id,
-          name: dadosCliente.name,
-          picture: dadosCliente.picture,
-          cover: dadosCliente.cover,
-          dateBirth: dadosCliente.dateBirth,
-          email: dadosCliente.email,
-          password: dadosCliente.password,
-          followers: dadosCliente.followers,
-          following: dadosCliente.following,
-          description: dadosCliente.description,
-        };
-      }
-      console.log('teste')
-      return null;
-    });
+    return this.firestore.collection('Person', ref => ref.where('email', '==', email)).snapshotChanges();
   }
 
   private isStringEmpty(string: String): boolean {

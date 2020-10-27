@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Person } from '../models/person.model';
 import { post } from '../models/post.module';
 
 @Injectable({
@@ -6,47 +8,51 @@ import { post } from '../models/post.module';
 })
 export class PostService {
 
-  private _listPost : post[] = [
-    {
-      id: 1,
-      name : "Fulano",
-      email : "admin@admin.com",
-      picture : "/assets/pictures/default-profile.jpg",
-      time : "12h",
-      text : "texto texto texto texto texto texto texto",
-      like : 23,
-      comments : [],
-      isComment : false,
-      share : 2
-    },
-  ];
+  constructor(private firestore : AngularFirestore) { }
 
-  constructor() { }
-
-  getListPost() : post[] {return this._listPost;}
+  getListPost() {
+    return this.firestore.collection('Post').snapshotChanges();
+  }
 
   addPost(post:post) {
-    post.id = this.getListPost().length + 1;
+    delete post.id
     post.isComment = false;
-    this.getListPost().unshift(post);
+    this.firestore.collection('Post').add({...post});
   }
 
-  addComment(id:Number, post:post){
-    let objPost = this.getPostById(id);
-    post.id = this.getListPost().length + 1;
-    post.isComment = true;
-    this.getListPost().unshift(post);
-    objPost.comments.unshift(post.id);
+  addComment(id:string, post:post){
+    this.getPostById(id).then((post)=>{
+      let objPost : post = post;
+      delete post.id
+      post.isComment = true;
+      this.firestore.collection('Post').add({...post}).then((result)=>{
+        objPost.comments.unshift(result.path.split('/')[1]);
+        this.firestore.doc(`Post/${objPost.id}`).update(objPost);
+      });
+    });
   }
 
-  getPostById(id:Number) : post{
-    for(let post of this._listPost){
-      if(id === post.id)
-        return post;
-    }
+  getPostById(id:string) {
+    return this.firestore.collection('Post').doc(id).ref.get().then((post)=>{
+      if(post.exists){
+        const postData = post.data();
+        return {
+          id: post.id,
+          name: postData.name,
+          email: postData.email,
+          picture: postData.picture,
+          time: postData.time,
+          text: postData.text,
+          like: postData.like,
+          comments: postData.comments,
+          isComment: postData.isComment,
+          share: postData.share,
+        }
+      }
+    });
   }
 
-  getPostByEmail(email: String): post[] {
-    return this.getListPost().filter(x => x.email == email);
-  }
+  // getPostByEmail(email: String): post[] {
+  //   return this.getListPost().filter(x => x.email == email);
+  // }
 }
