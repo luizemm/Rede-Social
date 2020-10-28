@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Person } from '../models/person.model';
 import { post } from '../models/post.module';
 
 @Injectable({
@@ -21,13 +20,14 @@ export class PostService {
   }
 
   addComment(id:string, post:post){
-    this.getPostById(id).then((post)=>{
-      let objPost : post = post;
-      delete post.id
+    return this.getPostById(id).then((dbPost)=>{
+      let objPost : post = dbPost;
+      delete post.id;
+      delete objPost.id;
       post.isComment = true;
       this.firestore.collection('Post').add({...post}).then((result)=>{
         objPost.comments.unshift(result.path.split('/')[1]);
-        this.firestore.doc(`Post/${objPost.id}`).update(objPost);
+        this.firestore.doc(`Post/${id}`).update(objPost);
       });
     });
   }
@@ -52,7 +52,7 @@ export class PostService {
     });
   }
 
-  // getPostByEmail(email: String): post[] {
-  //   return this.getListPost().filter(x => x.email == email);
-  // }
+  getPostByEmail(email: String) {
+    return this.firestore.collection('Post', ref => ref.where('email', '==', email)).snapshotChanges();
+  }
 }

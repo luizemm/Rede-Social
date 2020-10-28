@@ -24,7 +24,7 @@ export class AuthGuardService implements CanActivate {
   }
 
   signIn(email: String, password: String, callback : Callback){
-    return this.personService.getPersonByEmail(email).subscribe((objPerson)=>{
+    this.personService.getPersonByEmail(email).subscribe((objPerson)=>{
       let person = objPerson.map((item) => {
         const personData = item.payload.doc.data();
         return {

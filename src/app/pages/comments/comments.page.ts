@@ -51,10 +51,15 @@ export class CommentsPage implements OnInit {
     this.comment.email = this.person.email;
     this.comment.picture = this.person.picture;
     this.comment.time = '1h';
-    this.postService.addComment(this.post.id, this.comment);
-    this.postService.getPostById(this.post.comments[0]).then((post)=>{
-      this.listPost.unshift(post);
-    })
+    this.postService.addComment(this.post.id, this.comment).then(()=>{
+      this.postService.getPostById(this.post.id).then((parentPost)=>{
+        this.post = parentPost;
+        this.postService.getPostById(this.post.comments[0]).then((childpost)=>{
+          this.listPost.unshift(childpost);
+        });
+      });
+    });
+
     this.comment = new post();
   }
 }

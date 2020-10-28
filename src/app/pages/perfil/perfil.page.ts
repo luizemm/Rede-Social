@@ -19,7 +19,23 @@ export class PerfilPage implements OnInit {
     private postService: PostService
   ) {
     this.person = this.auth.getUserLoged();
-    this.posts = this.postService.getPostByEmail(this.person.email);
+    this.postService.getPostByEmail(this.person.email).subscribe((myPosts)=>{
+      this.posts = myPosts.map((item)=>{
+        const postData = item.payload.doc.data();
+        return {
+          id: item.payload.doc.id,
+          name: postData['name'],
+          email: postData['email'],
+          picture: postData['picture'],
+          time: postData['time'],
+          text: postData['text'],
+          like: postData['like'],
+          comments: postData['comments'],
+          isComment: postData['isComment'],
+          share: postData['share'],
+        }
+      })
+    });
    }
 
   ngOnInit() {
