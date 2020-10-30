@@ -7,15 +7,15 @@ import { Person } from '../models/person.model';
 })
 export class PersonService {
 
-  private _listPerson: Person[];
-
   constructor(private firestore : AngularFirestore) { }
 
-  getListPerson(): Person[] { return this._listPerson; }
+  getListPerson() {
+    return this.firestore.collection('Person').snapshotChanges();
+  }
 
   addPerson(objPerson: Person) {
     if (this.isStringEmpty(objPerson.name)) {
-      throw new Error("Name can't be empty.");
+      throw new Error("Nome não pode ser vazio!");
     }
 
     if (objPerson.picture == null) {
@@ -27,11 +27,11 @@ export class PersonService {
     }
 
     if (this.isStringEmpty(objPerson.email)) {
-      throw new Error("Email can't be empty.");
+      throw new Error("Email não pode ser vazio!");
     }
 
     if (this.isStringEmpty(objPerson.password)) {
-      throw new Error("Password can't be empty.");
+      throw new Error("Senha não pode ser vazio!");
     }
 
     objPerson.followers = new Array<String>();
@@ -48,6 +48,26 @@ export class PersonService {
 
   getPersonByEmail(email: String) {
     return this.firestore.collection('Person', ref => ref.where('email', '==', email)).snapshotChanges();
+  }
+
+  updatePerson(objPerson : Person, currentPassword : String, newPassword : String) {
+    if (this.isStringEmpty(objPerson.name)) {
+      throw new Error("Nome não pode ser vazio!");
+    }
+
+    if(!this.isStringEmpty(currentPassword)){
+      if(currentPassword !== objPerson.password)
+        throw new Error("Senha atual incorreta!");
+      
+      if(this.isStringEmpty(newPassword))
+        throw new Error("Nova senha não pode ser vazio!");
+
+      objPerson.password = newPassword;
+    }
+
+    let id : String = objPerson.id;
+    delete objPerson.id;
+    return this.firestore.doc(`Person/${id}`).update(objPerson);
   }
 
   private isStringEmpty(string: String): boolean {

@@ -4,7 +4,11 @@
 
 <ion-content>
   <div id="perfil">
-    <div id="backgroud-cover" [ngStyle]="{'background-image': 'url('+person.cover+')'}"></div>
+    <div id="backgroud-cover" [ngStyle]="{'background-image': 'url('+person.cover+')'}">
+      <ion-buttons routerLink="/edita-perfil" class="edit-button">
+        <ion-icon class="edit-icon" name="create-outline"></ion-icon>
+      </ion-buttons>
+    </div>
     <div id="info">
       <span class="text-follow followers">{{person.followers.length}} Seguidores</span>
       <img class="image" [src]="person.picture" alt="Default Picture">

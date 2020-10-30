@@ -22,8 +22,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
     canActivate: [AuthGuardService]
   },
-
-  { path: 'post', component: PostComponent },
   {
     path: 'new-post',
     loadChildren: () => import('./pages/new-post/new-post.module').then( m => m.NewPostPageModule),
@@ -38,7 +36,13 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule),
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'edita-perfil',
+    loadChildren: () => import('./pages/edita-perfil/edita-perfil.module').then( m => m.EditaPerfilPageModule),
+    canActivate: [AuthGuardService]
   }
+
 
 ];
 

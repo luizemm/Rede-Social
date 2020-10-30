@@ -5,9 +5,22 @@
 
   #backgroud-cover {
     height: 149px;
+    display: flex;
+    justify-content: flex-end;
     background-color: red;
     background-repeat: no-repeat;
     background-position: center center;
+
+    .edit-button {
+      height: 24px;
+      font-size: 24px;
+      color: #121212;
+      margin: 10px;
+    }
+
+    .edit-button:focus {
+      outline: none;
+    }
   }
 
   #info {

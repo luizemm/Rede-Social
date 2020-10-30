@@ -64,4 +64,8 @@ export class AuthGuardService implements CanActivate {
     }
     return this.userLoged;
   }
+
+  setUserLoged(objPerson : Person){
+    this.userLoged = objPerson;
+  }
 }

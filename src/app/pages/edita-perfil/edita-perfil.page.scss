@@ -1,0 +1,43 @@
+#perfil {
+  
+    #backgroud-cover {
+      height: 149px;
+      background-color: red;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  
+    #info {
+      text-align: center;
+      margin-top: -65px;
+  
+      .image {
+        border-radius: 50%;
+        height: 120px;
+        width: 120px;
+      }
+    }
+
+    #form {
+        .radius {
+            border-radius: 0.5625rem;
+        }
+    }
+
+    #submit {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        font-size: 25px;
+        color: #ffffff;
+        background-color: #121212;
+        margin-bottom: 16px;
+        margin-right:16px;
+      }
+
+      button:focus {
+        outline: none;
+      }
+    }
+}

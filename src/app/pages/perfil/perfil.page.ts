@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Person } from 'src/app/models/person.model';
 import { post } from 'src/app/models/post.module';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
@@ -9,7 +10,7 @@ import { PostService } from 'src/app/services/post.service';
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
 })
-export class PerfilPage implements OnInit {
+export class PerfilPage implements OnInit{
 
   person: Person = new Person();
   posts : post[];
@@ -41,5 +42,4 @@ export class PerfilPage implements OnInit {
   ngOnInit() {
 
   }
-
 }
