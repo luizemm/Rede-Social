@@ -15,7 +15,7 @@ export class PersonService {
 
   addPerson(objPerson: Person) {
     if (this.isStringEmpty(objPerson.name)) {
-      throw new Error("Nome não pode ser vazio!");
+      return Promise.reject("Erro: Nome não pode ser vazio!");
     }
 
     if (objPerson.picture == null) {
@@ -27,11 +27,11 @@ export class PersonService {
     }
 
     if (this.isStringEmpty(objPerson.email)) {
-      throw new Error("Email não pode ser vazio!");
+      return Promise.reject("Erro: Email não pode ser vazio!");
     }
 
     if (this.isStringEmpty(objPerson.password)) {
-      throw new Error("Senha não pode ser vazio!");
+      return Promise.reject("Erro: Senha não pode ser vazio!");
     }
 
     objPerson.followers = new Array<String>();
@@ -52,15 +52,15 @@ export class PersonService {
 
   updatePerson(objPerson : Person, currentPassword : String, newPassword : String) {
     if (this.isStringEmpty(objPerson.name)) {
-      throw new Error("Nome não pode ser vazio!");
+      return Promise.reject("Erro: Nome não pode ser vazio!");
     }
 
     if(!this.isStringEmpty(currentPassword)){
       if(currentPassword !== objPerson.password)
-        throw new Error("Senha atual incorreta!");
+      return Promise.reject("Erro: Senha atual incorreta!");
       
       if(this.isStringEmpty(newPassword))
-        throw new Error("Nova senha não pode ser vazio!");
+      return Promise.reject("Erro: O campo 'Nova senha' não pode ser vazio!");
 
       objPerson.password = newPassword;
     }

@@ -55,7 +55,7 @@ export class EditaPerfilPage implements OnInit {
         this.route.navigate(['/perfil']);
       });
     }).catch((error)=>{
-      this.mensagem.addMensagem(error.mensagem);
+      this.mensagem.addMensagem(error);
     });
   }
 }

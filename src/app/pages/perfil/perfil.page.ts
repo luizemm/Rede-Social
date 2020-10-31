@@ -42,4 +42,8 @@ export class PerfilPage implements OnInit{
   ngOnInit() {
 
   }
+
+  ionViewWillEnter(){
+    this.person = this.auth.getUserLoged();
+  }
 }
