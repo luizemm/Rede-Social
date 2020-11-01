@@ -27,34 +27,26 @@ export class AuthGuardService implements CanActivate {
     if(this.isStringEmpty(email) || this.isStringEmpty(password))
       return callback.errorFunction("Erro: Email ou senha inválida");
     
-    this.personService.getPersonByEmail(email).subscribe((objPerson)=>{
-      let person = objPerson.map((item) => {
-        const personData = item.payload.doc.data();
-        return {
-          id: item.payload.doc.id,
-          name: personData['name'],
-          picture: personData['picture'],
-          cover: personData['cover'],
-          dateBirth: personData['dateBirth'],
-          email: personData['email'],
-          password: personData['password'],
-          followers: personData['followers'],
-          following: personData['following'],
-          description: personData['description'],
-        };
-      });
+    this.personService.getPersonByEmailGet(email).subscribe(
+      (objPerson)=>{
+        let person;
+        objPerson.docs.forEach((item) => {
+          person = item.data();
+          person.id = item.id;
+        });
       
-      if (person.length > 0) {
-        if (person[0].password === password){
-          this.userLoged = person[0];
-          return callback.successFunction();
+        if (person != null) {
+          if (person.password === password){
+            this.userLoged = person;
+            return callback.successFunction();
+          }
+          else
+            return callback.errorFunction("Erro: Email ou senha inválida");
         }
         else
           return callback.errorFunction("Erro: Email ou senha inválida");
       }
-      else
-        return callback.errorFunction("Erro: Email ou senha inválida");
-    });
+    );
   }
 
   signOut() {

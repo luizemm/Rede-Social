@@ -50,6 +50,10 @@ export class PersonService {
     return this.firestore.collection('Person', ref => ref.where('email', '==', email)).snapshotChanges();
   }
 
+  getPersonByEmailGet(email: String) {
+    return this.firestore.collection('Person', ref => ref.where('email', '==', email)).get();
+  }
+
   updatePerson(objPerson : Person, currentPassword : String, newPassword : String) {
     if (this.isStringEmpty(objPerson.name)) {
       return Promise.reject("Erro: Nome não pode ser vazio!");
