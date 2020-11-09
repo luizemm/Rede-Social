@@ -15,7 +15,7 @@ import { Callback } from 'src/app/Utils/callback';
 export class CadastroPage implements OnInit {
 
   objPerson : Person = new Person();
-  confirmPass  : String;
+  confirmPass : String;
 
   constructor(
     private personService : PersonService,
@@ -28,14 +28,14 @@ export class CadastroPage implements OnInit {
   }
 
   onSubmit(){
-    this.personService.addPerson(this.objPerson).then(() => {
+    this.personService.addPerson(this.objPerson, this.confirmPass).then(() => {
       this.auth.signIn(this.objPerson.email, this.objPerson.password, new Callback(
         () => {
           this.menu.getUserLoged();
           this.route.navigate(['/home']);
         },
-        (msg) => {
-          this.mensagenService.addMensagem(msg);
+        (error) => {
+          this.mensagenService.addMensagem(error);
         }
       ));
     }).catch((error) => {

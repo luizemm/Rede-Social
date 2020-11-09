@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Person } from '../models/person.model';
@@ -12,7 +13,10 @@ export class AuthGuardService implements CanActivate {
 
   private userLoged: Person = null;
 
-  constructor(private personService: PersonService, private router: Router) { }
+  constructor(
+    private personService: PersonService,
+    private router: Router,
+    private fireAuth: AngularFireAuth) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if (!this.userLoged) {
@@ -26,27 +30,27 @@ export class AuthGuardService implements CanActivate {
   signIn(email: String, password: String, callback : Callback){
     if(this.isStringEmpty(email) || this.isStringEmpty(password))
       return callback.errorFunction("Erro: Email ou senha inválida");
-    
-    this.personService.getPersonByEmailGet(email).subscribe(
-      (objPerson)=>{
+
+    this.fireAuth.signInWithEmailAndPassword(email.toString(), password.toString()).then((person) => {
+      this.personService.getPersonById(person.user.uid).then((user) => {
         let person;
-        objPerson.docs.forEach((item) => {
-          person = item.data();
-          person.id = item.id;
-        });
-      
-        if (person != null) {
-          if (person.password === password){
-            this.userLoged = person;
-            return callback.successFunction();
-          }
-          else
-            return callback.errorFunction("Erro: Email ou senha inválida");
+        if(user.exists){
+          person = user.data();
+          person.id = user.id;
         }
-        else
-          return callback.errorFunction("Erro: Email ou senha inválida");
-      }
-    );
+        if(person != null){
+          this.userLoged = person;
+          return callback.successFunction();
+        } else {
+          return callback.errorFunction("Erro inesperado!");
+        }
+      }).catch((erro) => {
+        console.log(erro);
+        return callback.errorFunction("Erro inesperado!");
+      });
+    }).catch(() => {
+      return callback.errorFunction("Erro: Email ou senha inválida");
+    });
   }
 
   signOut() {

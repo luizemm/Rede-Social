@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Person } from '../models/person.model';
 
 @Injectable({
@@ -7,13 +8,15 @@ import { Person } from '../models/person.model';
 })
 export class PersonService {
 
-  constructor(private firestore : AngularFirestore) { }
+  constructor(
+    private firestore : AngularFirestore,
+    private fireAuth : AngularFireAuth) { }
 
   getListPerson() {
     return this.firestore.collection('Person').snapshotChanges();
   }
 
-  addPerson(objPerson: Person) {
+  addPerson(objPerson: Person, confirmPass : String) {
     if (this.isStringEmpty(objPerson.name)) {
       return Promise.reject("Erro: Nome não pode ser vazio!");
     }
@@ -34,6 +37,16 @@ export class PersonService {
       return Promise.reject("Erro: Senha não pode ser vazio!");
     }
 
+    if(objPerson.password.length < 6){
+      return Promise.reject("Erro: A senha deve possuir 6 ou mais dígitos!");
+    }
+
+    if(objPerson.password !== confirmPass){
+      return Promise.reject("Erro: As senhas não conferem!");
+    }
+
+    objPerson.dateBirth = objPerson.dateBirth.split('T')[0];
+
     objPerson.followers = new Array<String>();
     objPerson.following = new Array<String>();
     
@@ -43,15 +56,26 @@ export class PersonService {
 
     delete objPerson.id;
 
-    return this.firestore.collection('Person').add({...objPerson});
+    return this.fireAuth.createUserWithEmailAndPassword(objPerson.email.toString(), objPerson.password.toString()).then(
+      (auth) => {
+        return this.firestore.collection('Person').doc(auth.user.uid).set({...objPerson});
+      }
+    ).catch((erro) => {
+      switch(erro.code){
+        case 'auth/invalid-email' :
+          return Promise.reject("Erro: Email inválido!");
+        case 'auth/email-already-in-use' :
+          return Promise.reject("Erro: Esse email já está cadastrado!");
+      }
+    });
   }
 
   getPersonByEmail(email: String) {
     return this.firestore.collection('Person', ref => ref.where('email', '==', email)).snapshotChanges();
   }
 
-  getPersonByEmailGet(email: String) {
-    return this.firestore.collection('Person', ref => ref.where('email', '==', email)).get();
+  getPersonById(id : string) {
+    return this.firestore.collection('Person').doc(id).ref.get();
   }
 
   updatePerson(objPerson : Person, currentPassword : String, newPassword : String) {

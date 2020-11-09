@@ -7,7 +7,7 @@
             <ion-input [(ngModel)]="objPerson.name" name="name" type="text" placeholder="Nome"></ion-input>
           </ion-item>
           <ion-item class="ion-margin radius item-form">
-            <ion-input [(ngModel)]="objPerson.dateBirth" name="date" type="text" placeholder="Data de nascimento"></ion-input>
+            <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="objPerson.dateBirth" name="date" type="text" placeholder="Data de nascimento"></ion-datetime>
           </ion-item>
           <ion-item class="ion-margin radius item-form">
             <ion-input [(ngModel)]="objPerson.email" name="email" type="text" placeholder="Email"></ion-input>
