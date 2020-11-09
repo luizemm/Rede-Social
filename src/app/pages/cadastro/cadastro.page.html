@@ -4,19 +4,24 @@
       <form (ngSubmit)="onSubmit()" #cadastroForm="ngForm">
         <div class="ion-padding">
           <ion-item class="ion-margin radius item-form">
-            <ion-input [(ngModel)]="objPerson.name" name="name" type="text" placeholder="Nome"></ion-input>
+            <ion-label position="floating">Nome</ion-label>
+            <ion-input [(ngModel)]="objPerson.name" name="name" type="text"></ion-input>
           </ion-item>
           <ion-item class="ion-margin radius item-form">
-            <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="objPerson.dateBirth" name="date" type="text" placeholder="Data de nascimento"></ion-datetime>
+            <ion-label position="floating">Data de nascimento</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="objPerson.dateBirth" name="date"></ion-datetime>
           </ion-item>
           <ion-item class="ion-margin radius item-form">
-            <ion-input [(ngModel)]="objPerson.email" name="email" type="text" placeholder="Email"></ion-input>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input [(ngModel)]="objPerson.email" name="email" type="text"></ion-input>
           </ion-item>
           <ion-item class="ion-margin radius item-form">
-            <ion-input [(ngModel)]="objPerson.password" name="password" type="password" placeholder="Senha"></ion-input>
+            <ion-label position="floating">Senha</ion-label>
+            <ion-input [(ngModel)]="objPerson.password" name="password" type="password"></ion-input>
           </ion-item>
           <ion-item class="ion-margin radius item-form">
-            <ion-input [(ngModel)]="confirmPass" name="confirmpass" type="password" placeholder="Confirmar Senha"></ion-input>
+            <ion-label position="floating">Confirmar Senha</ion-label>
+            <ion-input [(ngModel)]="confirmPass" name="confirmpass" type="password"></ion-input>
           </ion-item>
           <ion-button type="submit" class="ion-margin botao-cadastro" expand="block">Cadastro</ion-button>
         </div>

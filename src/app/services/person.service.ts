@@ -91,10 +91,15 @@ export class PersonService {
       return Promise.reject("Erro: O campo 'Nova senha' não pode ser vazio!");
 
       objPerson.password = newPassword;
+
+      this.fireAuth.currentUser.then((user) => {
+        user.updatePassword(objPerson.password.toString());
+      });
     }
 
     let id : String = objPerson.id;
     delete objPerson.id;
+
     return this.firestore.doc(`Person/${id}`).update(objPerson);
   }
 

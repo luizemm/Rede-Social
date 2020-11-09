@@ -16,7 +16,7 @@
         </ion-item>
         <ion-item class="ion-margin radius item-form">
           <ion-label position="floating">Data de nascimento</ion-label>
-          <ion-input [(ngModel)]="person.dateBirth" name="dateBirth" type="text"></ion-input>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="person.dateBirth" name="dateBirth"></ion-datetime>
         </ion-item>
         <ion-item class="ion-margin radius item-form">
           <ion-label position="floating">Descrição</ion-label>
