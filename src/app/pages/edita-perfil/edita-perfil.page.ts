@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { Person } from 'src/app/models/person.model';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { MensagensService } from 'src/app/services/mensagens.service';
@@ -21,7 +22,8 @@ export class EditaPerfilPage implements OnInit {
     private auth : AuthGuardService, 
     private mensagem : MensagensService,
     private route : Router,
-    private personService : PersonService) 
+    private personService : PersonService,
+    private appComp : AppComponent) 
   {
     this.person = {...auth.getUserLoged()};
   }
@@ -52,6 +54,7 @@ export class EditaPerfilPage implements OnInit {
           };
         })[0];
         this.auth.setUserLoged(this.person);
+        this.appComp.getUserLoged();
         this.route.navigate(['/perfil']);
       });
     }).catch((error)=>{

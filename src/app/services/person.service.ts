@@ -90,6 +90,10 @@ export class PersonService {
       if(this.isStringEmpty(newPassword))
       return Promise.reject("Erro: O campo 'Nova senha' não pode ser vazio!");
 
+      if(newPassword.length < 6){
+        return Promise.reject("Erro: A nova senha deve possuir 6 dígitos ou mais!");
+      }
+
       objPerson.password = newPassword;
 
       this.fireAuth.currentUser.then((user) => {
