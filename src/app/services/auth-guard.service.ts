@@ -54,7 +54,10 @@ export class AuthGuardService implements CanActivate {
   }
 
   signOut() {
-    this.userLoged = null;
+    this.fireAuth.signOut().then(() => {
+      this.userLoged = null;
+      this.router.navigate(['/login']);
+    });
   }
 
   getUserLoged(): Person {
