@@ -39,7 +39,7 @@ export class PostService {
         return {
           id: post.id,
           name: postData.name,
-          email: postData.email,
+          idPerson: postData.idPerson,
           picture: postData.picture,
           time: postData.time,
           text: postData.text,
@@ -52,7 +52,7 @@ export class PostService {
     });
   }
 
-  getPostByEmail(email: String) {
-    return this.firestore.collection('Post', ref => ref.where('email', '==', email)).snapshotChanges();
+  getPostByIdPerson(idPerson: String) {
+    return this.firestore.collection('Post', ref => ref.where('idPerson', '==', idPerson)).snapshotChanges();
   }
 }

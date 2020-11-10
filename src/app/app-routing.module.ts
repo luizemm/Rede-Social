@@ -33,7 +33,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'perfil',
+    path: 'perfil/:id',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule),
     canActivate: [AuthGuardService]
   },

@@ -12,21 +12,16 @@ import { Person } from './models/person.model';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+  person: Person = new Person();
+
   public selectedIndex = 0;
   public appPages = [
     {
       title: 'Home',
       url: '/home',
       icon: 'home'
-    },
-    {
-      title: 'Perfil',
-      url: '/perfil',
-      icon: 'person'
     }
   ];
-  public profileImg ='/assets/pictures/default-profile.jpg';
-  person: Person;
 
   constructor(
     private platform: Platform,
@@ -43,6 +38,11 @@ export class AppComponent implements OnInit {
 
   getUserLoged(){
     this.person = this.auth.getUserLoged();
+    this.appPages.push({
+      title: 'Perfil',
+      url: '/perfil/' + this.person.id,
+      icon: 'person'
+    });
   }
 
   initializeApp() {

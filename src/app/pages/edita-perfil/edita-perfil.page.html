@@ -31,7 +31,7 @@
           <ion-input [(ngModel)]="newPassword" name="newPassword" type="password"></ion-input>
         </ion-item>
         <div id="submit">
-          <button routerLink="/perfil">
+          <button [routerLink]="['/perfil/', person.id]">
             <ion-icon name="close-outline"></ion-icon>
           </button>
           <button type="submit">

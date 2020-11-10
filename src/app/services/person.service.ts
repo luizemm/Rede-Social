@@ -101,6 +101,8 @@ export class PersonService {
       });
     }
 
+    objPerson.dateBirth = objPerson.dateBirth.split('T')[0];
+
     let id : String = objPerson.id;
     delete objPerson.id;
 

@@ -55,7 +55,7 @@ export class EditaPerfilPage implements OnInit {
         })[0];
         this.auth.setUserLoged(this.person);
         this.appComp.getUserLoged();
-        this.route.navigate(['/perfil']);
+        this.route.navigate(['/perfil/' + this.person.id]);
       });
     }).catch((error)=>{
       this.mensagem.addMensagem(error);

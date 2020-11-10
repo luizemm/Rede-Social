@@ -36,7 +36,7 @@ export class NewPostPage implements OnInit {
 
   onSubmit(){
     this.post.name = this.person.name;
-    this.post.email = this.person.email;
+    this.post.idPerson = this.person.id;
     this.post.picture = this.person.picture;
     this.post.time = '1h';
     this.postService.addPost(this.post);

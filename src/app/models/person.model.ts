@@ -10,5 +10,8 @@ export class Person {
     following: String[];
     description: String;
 
- constructor(){}
+ constructor(){
+    this.followers = [];
+    this.following = [];
+ }
 }
