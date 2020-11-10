@@ -5,7 +5,7 @@
 <ion-content>
   <div id="perfil">
     <div id="backgroud-cover" [ngStyle]="{'background-image': 'url('+person.cover+')'}">
-      <ion-buttons routerLink="/edita-perfil" class="edit-button">
+      <ion-buttons *ngIf="isMyProfile" routerLink="/edita-perfil" class="edit-button">
         <ion-icon class="edit-icon" name="create-outline"></ion-icon>
       </ion-buttons>
     </div>
@@ -16,6 +16,14 @@
       <div class="name">
         {{person.name}}
       </div>
+    </div>
+    <div *ngIf="!isMyProfile" id="followButton">
+      <ion-button *ngIf="!isFollowing" (click)="follow()" fill="outline" shape="round">
+        Seguir
+      </ion-button>
+      <ion-button *ngIf="isFollowing" (click)="unfollow()" shape="round">
+        Seguindo
+      </ion-button>
     </div>
     <div id="desc">
       {{person.description}}

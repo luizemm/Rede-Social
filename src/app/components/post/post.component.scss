@@ -23,6 +23,9 @@
     margin-right: 0.5rem;
 }
 
+.profile-pic:focus{
+    outline: none;
+}
 /* Estilo do icone de circulo*/
 
 .icon#circle {
@@ -39,6 +42,10 @@
     display: inline-block;
 }
 
+.same-line:focus {
+    outline: none;
+}
+
 span#name{
     font-weight: bold;
 }
@@ -47,6 +54,9 @@ span#time{
     vertical-align: middle;
 }
 
+#postText:focus {
+    outline: none;
+}
 /* Estilo do numero de curtidas/comentarios/compartilhados e do tempo do post */
 
 .amount {

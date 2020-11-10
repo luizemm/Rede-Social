@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from 'src/app/models/person.model';
 import { post } from 'src/app/models/post.module';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { MensagensService } from 'src/app/services/mensagens.service';
 import { PersonService } from 'src/app/services/person.service';
 import { PostService } from 'src/app/services/post.service';
 
@@ -14,14 +15,17 @@ import { PostService } from 'src/app/services/post.service';
 export class PerfilPage implements OnInit{
 
   person: Person = new Person();
+  userLoged: Person;
   isMyProfile: boolean;
+  isFollowing: boolean;
   posts: post[];
 
   constructor(
     private auth: AuthGuardService,
     private postService: PostService,
     private personService: PersonService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private mensagemService: MensagensService
   ) {
     this.getData();
   }
@@ -42,10 +46,14 @@ export class PerfilPage implements OnInit{
         following: auxPerson.following,
         description: auxPerson.description,
       }
-      if(this.auth.getUserLoged().id === this.person.id){
-        this.isMyProfile = true;
-      } else {
+
+      this.userLoged = this.auth.getUserLoged();
+
+      if(this.userLoged.id !== this.person.id){
         this.isMyProfile = false;
+        this.isFollowing = this.userLoged.following.includes(this.person.id);
+      } else {
+        this.isMyProfile = true;
       }
 
       this.postService.getPostByIdPerson(this.person.id).subscribe((myPosts)=>{
@@ -75,5 +83,38 @@ export class PerfilPage implements OnInit{
 
   ionViewWillEnter(){
     this.getData();
+  }
+
+  follow(){
+    this.userLoged.following.push(this.person.id);
+    this.person.followers.push(this.userLoged.id);
+    this.personService.updateFollower({...this.userLoged}).then(() => {
+      this.personService.updateFollower({...this.person}).then(() => {
+        this.isFollowing = true;
+        this.auth.setUserLoged(this.userLoged);
+      }).catch((erro) => {
+        console.log(erro);
+      });
+    }).catch((erro) => {
+      console.log(erro);
+    });
+  }
+
+  unfollow() {
+    let indexfollowing = this.userLoged.following.indexOf(this.person.id);
+    let indexFollower = this.person.followers.indexOf(this.userLoged.id);
+
+    this.userLoged.following.splice(indexfollowing);
+    this.person.followers.splice(indexFollower);
+    this.personService.updateFollower({...this.userLoged}).then(() => {
+      this.personService.updateFollower({...this.person}).then(() => {
+        this.isFollowing = false;
+        this.auth.setUserLoged(this.userLoged);
+      }).catch((erro) => {
+        console.log(erro);
+      });
+    }).catch((erro) => {
+      console.log(erro);
+    });
   }
 }

@@ -30,6 +30,12 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
+            <ion-item [routerLink]="['/perfil/', person.id]" routerDirection="root" lines="none" detail="false">
+              <ion-icon slot="start" [ios]="'person-outline'" [md]="'person-outline'"></ion-icon>
+              <ion-label>Perfil</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
             <ion-item (click)="logoff()" routerDirection="root" lines="none" detail="false">
               <ion-icon slot="start" [ios]="'exit-outline'" [md]="'exit-outline'"></ion-icon>
               <ion-label>Sair</ion-label>

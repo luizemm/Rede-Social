@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
         return {
           id: item.payload.doc.id,
           name: postData['name'],
-          email: postData['email'],
+          idPerson: postData['idPerson'],
           picture: postData['picture'],
           time: postData['time'],
           text: postData['text'],

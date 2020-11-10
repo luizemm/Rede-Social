@@ -1,17 +1,17 @@
-<ion-grid [routerLink]="['/comments/', post?.id]" class="post-border" fixed>
+<ion-grid class="post-border" fixed>
   <ion-row>
     <ion-col>
       <ion-row>
         <ion-col class="ion-align-items-center flex">
-          <img class="profile-pic same-line" [src]="post?.picture" alt="profile">
-          <div class="same-line">
+          <img [routerLink]="['/perfil/', post?.idPerson]" class="profile-pic same-line" [src]="post?.picture" alt="profile">
+          <div [routerLink]="['/perfil/', post?.idPerson]" class="same-line">
             <span class="same-line" id="name">{{post?.name}}</span>
             <ion-icon class="icon same-line gray" id="circle" name="ellipse"></ion-icon>
             <span class="same-line amount gray" id="time">{{post?.time}}</span>
           </div>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row [routerLink]="['/comments/', post?.id]" id="postText">
         <ion-col>
           <span>
             {{post?.text}}

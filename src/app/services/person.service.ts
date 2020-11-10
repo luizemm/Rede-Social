@@ -109,6 +109,13 @@ export class PersonService {
     return this.firestore.doc(`Person/${id}`).update(objPerson);
   }
 
+  updateFollower(objPersonFollower: Person){
+    let id: String = objPersonFollower.id;
+    delete objPersonFollower.id;
+
+    return this.firestore.doc(`Person/${id}`).update(objPersonFollower);
+  }
+
   private isStringEmpty(string: String): boolean {
     if (string == '' || string == null)
       return true;

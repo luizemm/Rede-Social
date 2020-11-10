@@ -38,12 +38,9 @@ export class AppComponent implements OnInit {
 
   getUserLoged(){
     this.person = this.auth.getUserLoged();
-    this.appPages.push({
-      title: 'Perfil',
-      url: '/perfil/' + this.person.id,
-      icon: 'person'
-    });
   }
+
+  
 
   initializeApp() {
     this.platform.ready().then(() => {
