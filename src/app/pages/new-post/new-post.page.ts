@@ -18,7 +18,6 @@ export class NewPostPage implements OnInit {
   post : post = new post();
 
   constructor(private postService : PostService,
-     private personService : PersonService,
      private route : Router,
      private auth: AuthGuardService,
      private mensagemService: MensagensService) 

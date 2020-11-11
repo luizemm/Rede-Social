@@ -1,0 +1,19 @@
+<ion-header>
+  <app-header-toolbar></app-header-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="back-button">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="['/perfil', person?.id]"></ion-back-button>
+    </ion-buttons>
+    <span>Seguidores</span>
+  </div>
+  <div *ngFor="let p of person?.followers">
+    <app-mini-perfil [idPerson]="p"></app-mini-perfil>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-footer-toolbar></app-footer-toolbar>
+</ion-footer>

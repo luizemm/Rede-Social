@@ -5,19 +5,22 @@ import { FooterToolbarComponent } from './footer-toolbar/footer-toolbar.componen
 import { RouterModule } from '@angular/router';
 import { MensagensComponent } from './mensagens/mensagens.component';
 import { CommonModule } from '@angular/common';
+import { MiniPerfilComponent } from './mini-perfil/mini-perfil.component';
 
 @NgModule({
     declarations: [
         PostComponent,
         HeaderToolbarComponent,
         FooterToolbarComponent,
-        MensagensComponent
+        MensagensComponent,
+        MiniPerfilComponent
     ],
     exports: [
         PostComponent,
         HeaderToolbarComponent,
         FooterToolbarComponent,
-        MensagensComponent
+        MensagensComponent,
+        MiniPerfilComponent
     ],
     imports: [
         RouterModule,

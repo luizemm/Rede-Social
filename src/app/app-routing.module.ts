@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { MiniPerfilComponent } from './components/mini-perfil/mini-perfil.component';
 import { PostComponent } from './components/post/post.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
@@ -41,7 +42,19 @@ const routes: Routes = [
     path: 'edita-perfil',
     loadChildren: () => import('./pages/edita-perfil/edita-perfil.module').then( m => m.EditaPerfilPageModule),
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'following/:id',
+    loadChildren: () => import('./pages/following/following.module').then( m => m.FollowingPageModule),
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'followers/:id',
+    loadChildren: () => import('./pages/followers/followers.module').then( m => m.FollowersPageModule),
+    canActivate: [AuthGuardService]
   }
+
+
 
 
 ];

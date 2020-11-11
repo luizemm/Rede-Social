@@ -10,9 +10,9 @@
       </ion-buttons>
     </div>
     <div id="info">
-      <span class="text-follow followers">{{person.followers.length}} Seguidores</span>
+      <span [routerLink]="['/followers/', person.id]" class="text-follow followers">{{person.followers.length}} Seguidores</span>
       <img class="image" [src]="person.picture" alt="Default Picture">
-      <span class="text-follow following">{{person.following.length}} Seguindo</span>
+      <span [routerLink]="['/following/', person.id]" class="text-follow following">{{person.following.length}} Seguindo</span>
       <div class="name">
         {{person.name}}
       </div>

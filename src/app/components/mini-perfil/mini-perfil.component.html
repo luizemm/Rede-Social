@@ -1,0 +1,27 @@
+<ion-grid class="perfil-border" fixed>
+  <ion-row>
+    <ion-col [routerLink]="['/perfil/', person?.id]" class="ion-align-items-center flex">
+      <img class="profile-pic same-line" [src]="person?.picture" alt="profile">
+      <div class="same-line">
+        <span class="same-line" id="name">{{person?.name}}</span>
+      </div>
+    </ion-col>
+    <ion-col class="ion-align-items-center flex" size="5">
+      <div *ngIf="!isMyProfile" id="followButton">
+        <ion-button *ngIf="!isFollowing" (click)="follow()" fill="outline" shape="round">
+          Seguir
+        </ion-button>
+        <ion-button *ngIf="isFollowing" (click)="unfollow()" shape="round">
+          Seguindo
+        </ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row [routerLink]="['/perfil/', person?.id]">
+    <ion-col>
+      <span>
+        {{person?.description}}
+      </span>
+    </ion-col>
+  </ion-row>
+</ion-grid>
