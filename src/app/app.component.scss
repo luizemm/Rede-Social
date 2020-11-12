@@ -4,6 +4,18 @@
 
 .flex {
   display: flex !important;
+
+  img:focus {
+    outline: none;
+  }
+
+  span:focus {
+    outline: none;
+  }
+
+  h4:focus {
+    outline: none;
+  }
 }
 
 /* Estilo da linha que separa a coluna superior da listagem */
