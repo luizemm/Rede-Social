@@ -25,6 +25,10 @@
         Seguindo
       </ion-button>
     </div>
+    <div id="date">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span> Nasceu em {{person.dateBirth | date:'longDate'}}</span>
+    </div>
     <div id="desc">
       {{person.description}}
     </div>
