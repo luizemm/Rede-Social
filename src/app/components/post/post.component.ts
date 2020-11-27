@@ -8,10 +8,11 @@ import { post } from 'src/app/models/post.module';
 })
 export class PostComponent implements OnInit {
 
-  @Input() post : post;
-  
-  constructor() {}
+  @Input() post : post = new post();
 
-  ngOnInit() {}
+  constructor() {
+  }
+
+  ngOnInit() { }
 
 }

@@ -16,6 +16,7 @@ import { firebaseConfig } from './services/credentials';
 
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { LifeTimePostPipe } from './pipes/life-time-post.pipe';
 registerLocaleData(localePt);
 
 @NgModule({

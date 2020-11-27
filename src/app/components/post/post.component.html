@@ -7,7 +7,7 @@
           <div [routerLink]="['/perfil/', post?.idPerson]" class="same-line">
             <span class="same-line" id="name">{{post?.name}}</span>
             <ion-icon class="icon same-line gray" id="circle" name="ellipse"></ion-icon>
-            <span class="same-line amount gray" id="time">{{post?.time}}</span>
+            <span class="same-line amount gray" id="time">{{post?.time | lifeTimePost}}</span>
           </div>
         </ion-col>
       </ion-row>

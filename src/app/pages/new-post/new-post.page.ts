@@ -37,7 +37,7 @@ export class NewPostPage implements OnInit {
     this.post.name = this.person.name;
     this.post.idPerson = this.person.id;
     this.post.picture = this.person.picture;
-    this.post.time = '1h';
+    this.post.time = Date.now();
     this.postService.addPost(this.post);
     this.post = new post();
     this.route.navigate(['/home']);

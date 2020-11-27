@@ -4,7 +4,6 @@ import { Person } from 'src/app/models/person.model';
 import { post } from 'src/app/models/post.module';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { MensagensService } from 'src/app/services/mensagens.service';
-import { PersonService } from 'src/app/services/person.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class CommentsPage implements OnInit {
   comment : post = new post();
 
   constructor(private postService : PostService,
-    private personService : PersonService,
     private route : ActivatedRoute,
     private auth: AuthGuardService,
     private mensagemService: MensagensService) 
@@ -50,7 +48,7 @@ export class CommentsPage implements OnInit {
     this.comment.name = this.person.name;
     this.comment.idPerson = this.person.id;
     this.comment.picture = this.person.picture;
-    this.comment.time = '1h';
+    this.comment.time = Date.now();
     this.postService.addComment(this.post.id, this.comment).then(()=>{
       this.postService.getPostById(this.post.id).then((parentPost)=>{
         this.post = parentPost;

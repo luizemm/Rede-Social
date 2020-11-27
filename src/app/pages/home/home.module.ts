@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { ComponentsModule } from '../../components/components.module';
+import { ExibePostPipe } from 'src/app/pipes/exibe-post.pipe';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { ComponentsModule } from '../../components/components.module';
     ComponentsModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, ExibePostPipe]
 })
 export class HomePageModule {}

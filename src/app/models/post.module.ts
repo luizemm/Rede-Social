@@ -3,7 +3,7 @@ export class post {
   name : String;
   idPerson : String;
   picture : String;
-  time : String;
+  time : number;
   text : String;
   like : Number;
   comments : string[];

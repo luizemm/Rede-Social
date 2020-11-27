@@ -9,10 +9,10 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class HomePage implements OnInit {
 
-  posts : post[];
+  posts : post[] = [];
 
   constructor(private postService : PostService) {
-    postService.getListPost().subscribe((listPost)=>{
+    this.postService.getListPost().subscribe((listPost)=>{
       this.posts = listPost.map((item)=>{
         const postData = item.payload.doc.data();
         return {
@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
 }

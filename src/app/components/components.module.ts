@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MensagensComponent } from './mensagens/mensagens.component';
 import { CommonModule } from '@angular/common';
 import { MiniPerfilComponent } from './mini-perfil/mini-perfil.component';
+import { LifeTimePostPipe } from '../pipes/life-time-post.pipe';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { MiniPerfilComponent } from './mini-perfil/mini-perfil.component';
         HeaderToolbarComponent,
         FooterToolbarComponent,
         MensagensComponent,
-        MiniPerfilComponent
+        MiniPerfilComponent,
+        LifeTimePostPipe
     ],
     exports: [
         PostComponent,
