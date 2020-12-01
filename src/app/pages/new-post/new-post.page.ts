@@ -4,8 +4,8 @@ import { Person } from 'src/app/models/person.model';
 import { post } from 'src/app/models/post.module';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { MensagensService } from 'src/app/services/mensagens.service';
-import { PersonService } from 'src/app/services/person.service';
 import { PostService } from 'src/app/services/post.service';
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-new-post',
@@ -20,7 +20,8 @@ export class NewPostPage implements OnInit {
   constructor(private postService : PostService,
      private route : Router,
      private auth: AuthGuardService,
-     private mensagemService: MensagensService) 
+     private mensagemService: MensagensService,
+     private camera: Camera)
   { 
     try {
       this.person = this.auth.getUserLoged();
@@ -41,6 +42,22 @@ export class NewPostPage implements OnInit {
     this.postService.addPost(this.post);
     this.post = new post();
     this.route.navigate(['/home']);
+  }
+
+  takePicture(){
+
+    const options : CameraOptions = {
+      quality: 100,
+      targetHeight: 200,
+      targetWidth: 200,
+      saveToPhotoAlbum: false,
+      correctOrientation: true,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then();
   }
 
 }
