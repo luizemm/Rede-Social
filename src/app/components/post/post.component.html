@@ -16,7 +16,7 @@
           <span>
             {{post?.text}}
           </span>
-          <ion-img [src]="post?.media"></ion-img>
+          <ion-img class="img-post" *ngIf="post?.media != ''" [src]="post?.media"></ion-img>
         </ion-col>
       </ion-row>
     </ion-col>

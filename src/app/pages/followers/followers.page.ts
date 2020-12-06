@@ -26,6 +26,8 @@ export class FollowersPage implements OnInit {
           name : auxPerson.name,
           picture : auxPerson.picture,
           cover: auxPerson.cover,
+          pictureName : auxPerson.pictureName,
+          coverName: auxPerson.coverName,
           dateBirth : auxPerson.dateBirth,
           email : auxPerson.email,
           password : auxPerson.password,

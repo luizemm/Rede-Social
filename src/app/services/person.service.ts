@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Person } from '../models/person.model';
+import * as firebase from 'firebase';
+import { File } from '@ionic-native/file/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,8 @@ export class PersonService {
 
   constructor(
     private firestore : AngularFirestore,
-    private fireAuth : AngularFireAuth) { }
+    private fireAuth : AngularFireAuth,
+    private file : File) { }
 
   getListPerson() {
     return this.firestore.collection('Person').snapshotChanges();
@@ -25,8 +28,16 @@ export class PersonService {
       objPerson.picture = '/assets/pictures/default-profile.jpg';
     }
 
+    if (objPerson.pictureName == null) {
+      objPerson.pictureName = '';
+    }
+
     if (objPerson.cover == null) {
       objPerson.cover = '/assets/pictures/default-cover.jpg';
+    }
+
+    if (objPerson.coverName == null) {
+      objPerson.coverName = '';
     }
 
     if (this.isStringEmpty(objPerson.email)) {
@@ -78,27 +89,56 @@ export class PersonService {
     return this.firestore.collection('Person').doc(id).ref.get();
   }
 
-  updatePerson(objPerson : Person, currentPassword : String, newPassword : String) {
+  async updatePerson(objPerson : Person, params) {
     if (this.isStringEmpty(objPerson.name)) {
       return Promise.reject("Erro: Nome não pode ser vazio!");
     }
 
-    if(!this.isStringEmpty(currentPassword)){
-      if(currentPassword !== objPerson.password)
-      return Promise.reject("Erro: Senha atual incorreta!");
+    if(!this.isStringEmpty(params.currentPassword)){
+      if(params.currentPassword !== objPerson.password)
+        return Promise.reject("Erro: Senha atual incorreta!");
       
-      if(this.isStringEmpty(newPassword))
-      return Promise.reject("Erro: O campo 'Nova senha' não pode ser vazio!");
+      if(this.isStringEmpty(params.newPassword))
+        return Promise.reject("Erro: O campo 'Nova senha' não pode ser vazio!");
 
-      if(newPassword.length < 6){
+      if(params.newPassword.length < 6)
         return Promise.reject("Erro: A nova senha deve possuir 6 dígitos ou mais!");
-      }
 
-      objPerson.password = newPassword;
+      objPerson.password = params.newPassword;
 
       this.fireAuth.currentUser.then((user) => {
         user.updatePassword(objPerson.password.toString());
       });
+    }
+
+    if(params.profilePic != objPerson.picture){
+      try {
+        params.profilePic = params.profilePic.replace('http://localhost/', 'file://');
+        const blobImage = await this.createBlobImageFile(params.profilePic);
+
+        if(objPerson.pictureName != "")
+          await this.deleteImage(objPerson.pictureName);
+
+        objPerson.picture = await this.uploadImage(blobImage, params.profilePicName);
+        objPerson.pictureName = params.profilePicName;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if(params.coverPic != objPerson.cover){
+      try {
+        params.coverPic = params.coverPic.replace('http://localhost/', 'file://');
+        const blobImage = await this.createBlobImageFile(params.coverPic);
+
+        if(objPerson.coverName != "")
+          await this.deleteImage(objPerson.coverName);
+
+        objPerson.cover = await this.uploadImage(blobImage, params.coverPicName);
+        objPerson.coverName = params.coverPicName;
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     objPerson.dateBirth = objPerson.dateBirth.split('T')[0];
@@ -106,7 +146,7 @@ export class PersonService {
     let id : String = objPerson.id;
     delete objPerson.id;
 
-    return this.firestore.doc(`Person/${id}`).update(objPerson);
+    return await this.firestore.doc(`Person/${id}`).update(objPerson);
   }
 
   updateFollower(objPersonFollower: Person){
@@ -114,6 +154,54 @@ export class PersonService {
     delete objPersonFollower.id;
 
     return this.firestore.doc(`Person/${id}`).update(objPersonFollower);
+  }
+
+  createBlobImageFile(imagePath) : Promise<Blob>{
+    return new Promise((resolve, reject) => {
+      this.file.resolveLocalFilesystemUrl(imagePath).then((fileData) => {
+
+        const {name, nativeURL} = fileData;
+        const path = nativeURL.substr(0, nativeURL.lastIndexOf('/') + 1);
+
+        return this.file.readAsArrayBuffer(path, name);
+
+      }).then((buffer) => {
+        const blobImage = new Blob([buffer], {
+          type: 'image/jpeg'
+        });
+
+        resolve(blobImage);
+
+      }).catch((error) => {
+        console.log(error);
+        reject(error);
+      });
+    });
+  }
+
+  async uploadImage(image, imageName) : Promise<string>{
+    if(image){
+      try {
+        imageName = 'imagePerson/' + imageName;
+
+        const uploadResult = await firebase.storage().ref().child(imageName).put(image);
+        
+        return uploadResult.ref.getDownloadURL();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  async deleteImage(imageName){
+    try {
+      imageName = 'imagePerson/' + imageName;
+
+      await firebase.storage().ref().child(imageName).delete();
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   private isStringEmpty(string: String): boolean {

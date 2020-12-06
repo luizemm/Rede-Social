@@ -110,7 +110,6 @@ export class NewPostPage implements OnInit {
       this.file.copyFile(path, fileName, this.file.dataDirectory, newFileName).then(() => {
 
       this.imagemSelecionada = this.pathToImage(this.file.dataDirectory + newFileName);
-      console.log('imagemSelecionada: ' + this.imagemSelecionada);
       this.hasImage = true;
 
     }).catch((error) => {

@@ -74,13 +74,9 @@ export class PostService {
   createBlobImageFile(imagePath) : Promise<Blob>{
     return new Promise((resolve, reject) => {
       this.file.resolveLocalFilesystemUrl(imagePath).then((fileData) => {
-        console.log("fileData: " + fileData);
 
         const {name, nativeURL} = fileData;
         const path = nativeURL.substr(0, nativeURL.lastIndexOf('/') + 1);
-
-        console.log("name: " + name);
-        console.log("path: " + path);
 
         return this.file.readAsArrayBuffer(path, name);
       }).then((buffer) => {
