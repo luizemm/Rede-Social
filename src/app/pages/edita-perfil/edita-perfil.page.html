@@ -4,9 +4,9 @@
 
 <ion-content>
   <div id="perfil">
-    <div (click)="takePicture(true, 0)" id="backgroud-cover" [ngStyle]="{'background-image': 'url('+ params.coverPic +')'}"></div>
+    <div (click)="presentActionSheet(0)" id="backgroud-cover" [ngStyle]="{'background-image': 'url('+ params.coverPic +')'}"></div>
     <div id="info">
-      <img (click)="takePicture(true, 1)" class="image" [src]="params.profilePic" alt="Default Picture">
+      <img (click)="presentActionSheet(1)" class="image" [src]="params.profilePic" alt="Default Picture">
     </div>
     <form (ngSubmit)="onSubmit()" #editForm="ngForm">
       <div id="form">

@@ -10,7 +10,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { Platform } from '@ionic/angular';
+import { ActionSheetController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-edita-perfil',
@@ -36,6 +36,7 @@ export class EditaPerfilPage implements OnInit {
     private route : Router,
     private personService : PersonService,
     private appComp : AppComponent,
+    private actionSheetController : ActionSheetController,
     private camera: Camera,
     private file: File,
     private webView: WebView,
@@ -147,5 +148,32 @@ export class EditaPerfilPage implements OnInit {
   private createNameImage(){
       const d = new Date();
       return (d.getTime() + '.jpg');
+  }
+
+  async presentActionSheet(selectPic) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Imagem',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Tirar foto',
+        icon: 'camera-outline',
+        handler: () => {
+          this.takePicture(false, selectPic);
+        }
+      }, {
+        text: 'Carregar foto',
+        icon: 'image-outline',
+        handler: () => {
+          this.takePicture(true, selectPic);
+        }
+      }, {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }
