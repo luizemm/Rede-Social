@@ -8,18 +8,19 @@
       <img class="profile-pic" [src]="person.picture" alt="profile">
     </div>
     <form (ngSubmit)="onSubmit()" #postForm="ngForm">
-      <div class="textarea">
+      <div [ngClass]="{'textarea': !hasImage, 'textareaImg': hasImage}">
         <textarea [(ngModel)]="post.text" name="text" class="post" maxlength="240" placeholder="Digite algo que deseja."></textarea>
+      </div>
+      <div *ngIf="hasImage" class="takePicture">
+        <ion-icon (click)="removeImage()" class="remove-icon" name="close-outline"></ion-icon>
+        <ion-img class="picture" [src]="imagemSelecionada"></ion-img>
       </div>
       <div class="ion-padding options">
         <ion-buttons class="icons-option">
-          <ion-icon (click)="takePicture()" name="camera-outline"></ion-icon>
+          <ion-icon (click)="takePicture(false)" name="camera-outline"></ion-icon>
         </ion-buttons>
         <ion-buttons class="icons-option">
-          <ion-icon name="image-outline"></ion-icon>
-        </ion-buttons>
-        <ion-buttons class="icons-option">
-          <ion-icon name="happy-outline"></ion-icon>
+          <ion-icon (click)="takePicture(true)" name="image-outline"></ion-icon>
         </ion-buttons>
         <button class="icon-end-option" type="submit">
           <ion-icon name="send-outline"></ion-icon>

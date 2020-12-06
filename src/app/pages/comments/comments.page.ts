@@ -49,6 +49,8 @@ export class CommentsPage implements OnInit {
     this.comment.idPerson = this.person.id;
     this.comment.picture = this.person.picture;
     this.comment.time = Date.now();
+    this.comment.media = "";
+    this.comment.mediaName = "";
     this.postService.addComment(this.post.id, this.comment).then(()=>{
       this.postService.getPostById(this.post.id).then((parentPost)=>{
         this.post = parentPost;

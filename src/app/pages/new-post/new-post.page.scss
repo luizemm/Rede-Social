@@ -34,6 +34,10 @@ div.textarea {
     height: 100%;
 }
 
+div.textareaImg {
+    height: 20%;
+}
+
 textarea.post {
     width: 100%;
     height: 100%;
@@ -47,14 +51,28 @@ textarea.post:focus {
     outline: none;
 }
 
+.takePicture {
+    padding: 25px;
+    text-align: center;
+}
+
+.remove-icon{
+    font-size: 24px;
+}
+
+.picture {
+    margin-bottom: 60px;
+}
+
 /* Estilos da div options */
 
 .options {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    bottom: 0;
+    bottom: 55px;
     display: flex;
     border-top: 0.0625rem solid #3e3e3e;
+    background-color: #121212;
 }
 
 .icons-option {

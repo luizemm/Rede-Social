@@ -1,22 +1,35 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { File } from '@ionic-native/file/ngx';
 import { post } from '../models/post.module';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(private firestore : AngularFirestore) { }
+  constructor(private firestore : AngularFirestore,
+    private file : File) { }
 
   getListPost() {
     return this.firestore.collection('Post').snapshotChanges();
   }
 
-  addPost(post:post) {
+  async addPost(post:post) {
     delete post.id
     post.isComment = false;
-    this.firestore.collection('Post').add({...post});
+    try {
+      if(post.media != ""){
+        post.media = post.media.replace('http://localhost/', 'file://');
+        const blobImage = await this.createBlobImageFile(post.media);
+        post.media = await this.uploadImage(blobImage, post.mediaName);
+      }
+      await this.firestore.collection('Post').add({...post});
+    } catch (error) {
+      
+    }
+    
   }
 
   addComment(id:string, post:post){
@@ -47,6 +60,8 @@ export class PostService {
           comments: postData.comments,
           isComment: postData.isComment,
           share: postData.share,
+          mediaName: postData.mediaName,
+          media: postData.media
         }
       }
     });
@@ -54,5 +69,46 @@ export class PostService {
 
   getPostByIdPerson(idPerson: String) {
     return this.firestore.collection('Post', ref => ref.where('idPerson', '==', idPerson)).snapshotChanges();
+  }
+
+  createBlobImageFile(imagePath) : Promise<Blob>{
+    return new Promise((resolve, reject) => {
+      this.file.resolveLocalFilesystemUrl(imagePath).then((fileData) => {
+        console.log("fileData: " + fileData);
+
+        const {name, nativeURL} = fileData;
+        const path = nativeURL.substr(0, nativeURL.lastIndexOf('/') + 1);
+
+        console.log("name: " + name);
+        console.log("path: " + path);
+
+        return this.file.readAsArrayBuffer(path, name);
+      }).then((buffer) => {
+        const blobImage = new Blob([buffer], {
+          type: 'image/jpeg'
+        });
+
+        resolve(blobImage);
+
+      }).catch((error) => {
+        console.log(error);
+        reject(error);
+      });
+    });
+  }
+
+  async uploadImage(image, imageName) : Promise<string>{
+    console.log("blobimage: " + image);
+    if(image){
+      try {
+        imageName = 'imagePosts/' + imageName;
+
+        const uploadResult = await firebase.storage().ref().child(imageName).put(image);
+        
+        return uploadResult.ref.getDownloadURL();
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 }

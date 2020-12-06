@@ -9,6 +9,8 @@ export class post {
   comments : string[];
   isComment : Boolean;
   share : Number;
+  mediaName : string;
+  media : string
 
   constructor(){
     this.like = 0;

@@ -26,6 +26,8 @@ export class HomePage implements OnInit {
           comments: postData['comments'],
           isComment: postData['isComment'],
           share: postData['share'],
+          media: postData['media'],
+          mediaName: postData['mediaName'],
         }
       })
     });
