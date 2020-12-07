@@ -45,6 +45,22 @@ export class PostService {
     });
   }
 
+  likePost(idPerson: string, objPost: post){
+    objPost.like.unshift(idPerson);
+    this.updatePost(objPost);
+  }
+
+  unlikePost(idPerson: string, objPost: post){
+    objPost.like.splice(objPost.like.indexOf(idPerson), 1);
+    this.updatePost(objPost);
+  }
+
+  async updatePost(objPost: post){
+    let idPost = objPost.id;
+    delete objPost.id;
+    await this.firestore.doc(`Post/${idPost}`).update(objPost);
+  }
+
   getPostById(id:string) {
     return this.firestore.collection('Post').doc(id).ref.get().then((post)=>{
       if(post.exists){

@@ -25,13 +25,17 @@
         <ion-icon class="gray tiny-margin size-icon" name="share-social-outline"></ion-icon>
         <span class="amount gray">{{post?.share}}</span>
       </ion-buttons>
-      <ion-buttons class="button-margin ion-align-items-center">
+      <ion-buttons [routerLink]="['/comments/', post?.id]" class="button-margin ion-align-items-center">
         <ion-icon class="gray tiny-margin size-icon" name="chatbox-outline"></ion-icon>
         <span class="amount gray">{{post?.comments.length}}</span>
       </ion-buttons>
-      <ion-buttons class="ion-align-items-center">
+      <ion-buttons *ngIf="!wasLiked()" (click)="like()" class="ion-align-items-center">
         <ion-icon class="gray tiny-margin size-icon" name="thumbs-up-outline"></ion-icon>
-        <span class="amount gray">{{post?.like}}</span>
+        <span class="amount gray">{{post?.like.length}}</span>
+      </ion-buttons>
+      <ion-buttons *ngIf="wasLiked()" (click)="unlike()" class="ion-align-items-center">
+        <ion-icon class="blue tiny-margin size-icon" name="thumbs-up-outline"></ion-icon>
+        <span class="blue gray">{{post?.like.length}}</span>
       </ion-buttons>
     </ion-col>
   </ion-row>

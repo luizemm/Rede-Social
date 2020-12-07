@@ -69,6 +69,10 @@ span#time{
     margin-bottom: 1rem;
 }
 
+.button-margin:focus{
+    outline: none;
+}
+
 /* Espaço entre icone e numero (botoes de curtida/comentarios/coompartilhados) */
 .tiny-margin {
     margin-right: 0.125rem;
@@ -87,6 +91,10 @@ span#time{
 /* Cores */
 .gray {
     color: #687684;
+}
+
+.blue{
+    color: #428cff;
 }
 
 .img-post{

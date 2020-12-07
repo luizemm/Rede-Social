@@ -5,7 +5,7 @@ export class post {
   picture : String;
   time : number;
   text : String;
-  like : Number;
+  like : string[];
   comments : string[];
   isComment : Boolean;
   share : Number;
@@ -13,7 +13,7 @@ export class post {
   media : string
 
   constructor(){
-    this.like = 0;
+    this.like = [];
     this.comments = [];
     this.share = 0;
   }
